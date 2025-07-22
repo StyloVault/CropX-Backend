@@ -38,15 +38,15 @@ export class ProductsNewsModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
-        { path: '*/products/inc', method: RequestMethod.POST },
-        { path: '*/products/inc', method: RequestMethod.PATCH },
-        { path: '*/products/news', method: RequestMethod.POST },
-        { path: '*/products/news', method: RequestMethod.PATCH },
-        { path: '*/price', method: RequestMethod.PATCH },
-        { path: '*/prices', method: RequestMethod.POST },
-        { path: '*/subscription', method: RequestMethod.POST },
-        { path: '*/subscription', method: RequestMethod.DELETE },
-        { path: '*/subscription', method: RequestMethod.GET},
+        { path: 'api/v1/products/inc', method: RequestMethod.POST },
+        { path: 'api/v1/products/inc', method: RequestMethod.PATCH },
+        { path: 'api/v1/products/news', method: RequestMethod.POST },
+        { path: 'api/v1/products/news', method: RequestMethod.PATCH },
+        { path: 'api/v1/price', method: RequestMethod.PATCH },
+        { path: 'api/v1/prices', method: RequestMethod.POST },
+        { path: 'api/v1/subscription', method: RequestMethod.POST },
+        { path: 'api/v1/subscription', method: RequestMethod.DELETE },
+        { path: 'api/v1/subscription', method: RequestMethod.GET},
       );
   }
 }

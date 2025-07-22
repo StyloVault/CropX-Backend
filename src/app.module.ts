@@ -93,7 +93,7 @@ const loggerMiddleware = (req: Request, res: Response, next: () => void) => {
 export class AppModule implements NestModule, OnModuleInit {
   constructor(private userServices: UsersService) {}
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(loggerMiddleware).forRoutes('*');
+    // consumer.apply(loggerMiddleware).forRoutes('*');
   }
 
   async onModuleInit() {

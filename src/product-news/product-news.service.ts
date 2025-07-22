@@ -31,7 +31,8 @@ import {
     }
   
     async fetchProducts(data, query) {
-      return this.productRepository.fetchProduct(data, query);
+      const payload = data ? data : {};
+      return this.productRepository.fetchProduct(payload, query);
     }
   
     async getSingleProduct(search) {

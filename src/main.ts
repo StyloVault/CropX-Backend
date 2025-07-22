@@ -46,8 +46,8 @@ async function bootstrap() {
   );
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  app.use(xss());
-  app.use(mongoSanitize());
+  // app.use(xss());
+  // app.use(mongoSanitize());
   app.use(helmet());
   await app.listen(process.env.PORT || AppConfig.PORT);
 }

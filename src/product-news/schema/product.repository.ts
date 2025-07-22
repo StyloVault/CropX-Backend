@@ -32,6 +32,8 @@ export class ProductRepository {
   }
 
   async fetchProduct(data, query) {
+
+    
     try {
       const subUser = this.productModel.find(data);
       let { page, limit } = query;
