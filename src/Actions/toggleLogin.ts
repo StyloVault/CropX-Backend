@@ -10,20 +10,21 @@ export class ToggleLogin {
   constructor(private userRepository: UserRepository) {}
 
   async execute(body: any) {
-    const { id, sID } = body;
+    const { id, businessId, sID } = body;
+    const tenant = businessId || sID;
     const user = await this.findUser(id);
-    const { membership, team } = await this.getMemberOrTeam(user, sID);
+    const { membership, team } = await this.getMemberOrTeam(user, tenant);
     let payload: any;
     let refreshPayload: any;
 
     if (membership) {
-      const data = this.setMembershipPayload(user, membership, sID);
+      const data = this.setMembershipPayload(user, membership, tenant);
       payload = data.payload;
       refreshPayload = data.refreshPayload;
     }
 
     if (team) {
-      const data = this.setTeamPayload(user, team, sID);
+      const data = this.setTeamPayload(user, team, tenant);
       payload = data.payload;
       refreshPayload = data.refreshPayload;
     }
@@ -38,47 +39,51 @@ export class ToggleLogin {
     return { accessToken, refreshToken, user };
   }
 
-  private setMembershipPayload(user, membership, sID) {
+  private setMembershipPayload(user, membership, tenant) {
     this.handleInactiveOrSuspended(membership.status, 'MEMBER');
     const payload = {
-      sID,
+      businessId: tenant,
+      sID: tenant,
       userId: user._id,
       membershipId: membership._id,
       userRole: user.userRole,
       adminRole: user?.adminRole,
       usage: 'LOGIN',
-      business_name: membership?.business.name
+      business_name: membership?.business.name,
     };
     const refreshPayload = {
-      sID,
+      businessId: tenant,
+      sID: tenant,
       userId: user._id,
       membershipId: membership._id,
       userRole: user.userRole,
       usage: 'refresh',
-      business_name: membership?.business.name
+      business_name: membership?.business.name,
     };
     return { payload, refreshPayload };
   }
 
-  private setTeamPayload(user, team, sID) {
+  private setTeamPayload(user, team, tenant) {
     this.handleInactiveOrSuspended(team.accountStatus, 'TEAM');
     const payload = {
-      sID,
+      businessId: tenant,
+      sID: tenant,
       userId: user._id,
       teamId: team.id,
       userRole: team.memberRole,
       permissions: JSON.stringify(team.permissions),
       usage: 'LOGIN',
-      business_name: team?.business.name
+      business_name: team?.business.name,
     };
     const refreshPayload = {
-      sID,
+      businessId: tenant,
+      sID: tenant,
       userId: user._id,
       teamId: team.id,
       userRole: team.memberRole,
       permissions: JSON.stringify(team.permissions),
       usage: 'refresh',
-      business_name: team?.business.name
+      business_name: team?.business.name,
     };
     return { payload, refreshPayload };
   }
@@ -98,15 +103,15 @@ export class ToggleLogin {
     return user;
   }
 
-  private async getMemberOrTeam(user, sID) {
+  private async getMemberOrTeam(user, tenant) {
     const membership = await this.userRepository.getMembershipOne({
       user: user._id,
-      business: sID,
+      business: tenant,
     });
 
     const team = await this.userRepository.getOneTeam({
       user: user._id,
-      business: sID,
+      business: tenant,
     });
 
     if (!membership && !team) {

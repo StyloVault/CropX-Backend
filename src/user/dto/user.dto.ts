@@ -220,6 +220,10 @@ export class ToggleLoginDTO {
   id: string;
 
   @IsMongoId()
+  @IsOptional()
+  businessId?: string;
+
+  @IsMongoId()
   sID: string;
 }
 

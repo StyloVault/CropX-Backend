@@ -20,6 +20,8 @@ import { AuthMiddleware } from 'src/common/middleware/auth.middleware';
 import { ImageStorage } from 'src/common/services/image.service';
 import { ProductsNewsController } from './product-news.controller';
 import { ProductsNewsService } from './product-news.service';
+import { AiNewsService } from './ai-news.service';
+import { OpenAIService } from '../common/services/openai.service';
 
 @Module({
   imports: [
@@ -31,7 +33,13 @@ import { ProductsNewsService } from './product-news.service';
     ]),
   ],
   controllers: [ProductsNewsController],
-  providers: [ProductsNewsService, ProductRepository, ImageStorage],
+  providers: [
+    ProductsNewsService,
+    ProductRepository,
+    ImageStorage,
+    OpenAIService,
+    AiNewsService,
+  ],
 })
 export class ProductsNewsModule {
   configure(consumer: MiddlewareConsumer) {
