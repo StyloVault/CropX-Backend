@@ -34,7 +34,7 @@ export class InventoryService {
          const payload = this.preparePayload(sID, body);
           const inventory = await this.inventoryRepository.updateInventory({_id : id, businessId: sID},payload);
           this.updateActivity(inventory, userId, sID, 'Updated Inventory')
-          return this.apiResponse.success(res, 'Inventory created successfully', inventory, 201)
+          return this.apiResponse.success(res, 'Inventory updated successfully', inventory, 200)
       }catch (error) {
           return this.apiResponse.failure(res, error.message, [], error.statusCode);
      }
@@ -58,7 +58,6 @@ export class InventoryService {
       })
     }
     preparePayload(sID: string, body: InventoryDTO) {
-      console.log(sID)
            return {
                  name: body.name,
                  description : body.description,

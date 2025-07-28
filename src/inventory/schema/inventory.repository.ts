@@ -99,7 +99,6 @@ export class InventoryRepository {
     
     async getSingleInventory(data : any) {
         const inventory = await this.inventoryModel.findOne(data).exec();
-       console.log(inventory)
         if(!inventory) {
             throw new Error('inventory not found');
         }
