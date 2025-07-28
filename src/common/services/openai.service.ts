@@ -15,8 +15,10 @@ export class OpenAIService {
       model: 'gpt-4o',
       messages: [{ role: 'user', content: `Summarize this news:\n${text}` }],
       max_tokens: 200,
+      stream: false,
     });
-    return completion.choices[0].message?.content?.trim() || '';
+    const result = completion as OpenAI.Chat.ChatCompletion;
+    return result.choices[0].message?.content?.trim() || '';
   }
 
   async generateImage(prompt: string): Promise<string> {
@@ -34,7 +36,11 @@ export class OpenAIService {
    * Performs a generic chat completion request. Returns the raw message content.
    */
   async chat(params: OpenAI.Chat.ChatCompletionCreateParams): Promise<string> {
-    const completion = await this.openai.chat.completions.create(params);
-    return completion.choices[0].message?.content?.trim() || '';
+    const completion = await this.openai.chat.completions.create({
+      ...params,
+      stream: false,
+    });
+    const result = completion as OpenAI.Chat.ChatCompletion;
+    return result.choices[0].message?.content?.trim() || '';
   }
 }
