@@ -1,14 +1,17 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Invoice } from './invoiceschema';
 import { InvoiceDTO } from './../dto/invoiceDto';
+import { CustomerRepository } from 'src/customer/schema/customer.repository';
 import { InvoiceStatus } from "../enum/invoiceEnum";
 
 @Injectable()
 export class InvoiceRepository {
    private invoice : Promise<Invoice>;
-  constructor(@InjectModel('Invoice') private readonly invoiceModel: Model<Invoice>,
+  constructor(
+    @InjectModel('Invoice') private readonly invoiceModel: Model<Invoice>,
+    private readonly customerRepository: CustomerRepository,
         ) {  }
         
 
@@ -135,15 +138,14 @@ export class InvoiceRepository {
   
     private async prepareInvoice(sID:string, body : InvoiceDTO) {
         
+    const customer = await this.customerRepository.getSingleCustomer({ _id: body.customerId, businessId: sID });
+    if (!customer) {
+        throw new BadRequestException('Invalid customer provided');
+    }
+
     let data = {
         title :  body.title,
-        customer : {
-                name :  body.customer.name,
-                email : body.customer.email,
-                phone : body.customer.phone,
-                billingAdress : body.customer.billingAddress,
-                deliveryAddress : body.customer.deliveryAddress
-        },
+        customer : customer._id,
         business : {
             id : sID,
             embedLogo : body.business.embedLogo,
