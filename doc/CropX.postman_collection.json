@@ -1,0 +1,131 @@
+{
+  "info": {
+    "name": "CropX API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "API examples for CropX backend"
+  },
+  "variable": [
+    {"key": "base_url", "value": "http://localhost:3000"}
+  ],
+  "item": [
+    {
+      "name": "Inventory",
+      "description": "Manage farm inventories",
+      "item": [
+        {
+          "name": "List Inventories",
+          "request": {"method": "GET", "url": "{{base_url}}/api/v1/inventory/get"}
+        },
+        {"name": "Get Inventory",
+          "request": {"method": "GET", "url": "{{base_url}}/api/v1/inventory/get/:id"}
+        },
+        {"name": "Create Inventory",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw": "{\n  \"name\": \"Tomatoes\",\n  \"quantity\": 100,\n  \"unit\": \"kg\"\n}"},
+            "url": "{{base_url}}/api/v1/inventory/create"
+          }
+        },
+        {"name": "Update Inventory",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw": "{\n  \"name\": \"Tomatoes\"\n}"},
+            "url": "{{base_url}}/api/v1/inventory/update/:id"
+          }
+        },
+        {"name": "Delete Inventory",
+          "request": {"method": "DELETE", "url": "{{base_url}}/api/v1/inventory/delete/:id"}
+        },
+        {"name": "Inventory Summary",
+          "request": {"method": "GET", "url": "{{base_url}}/api/v1/inventory/summary"}
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {"name": "List Customers", "request": {"method": "GET", "url": "{{base_url}}/api/v1/customer/get"}},
+        {"name": "Get Customer", "request": {"method": "GET", "url": "{{base_url}}/api/v1/customer/get/:id"}},
+        {"name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw": "{\n  \"name\": \"John Doe\",\n  \"phone\": \"+234111111111\",\n  \"email\": \"john@example.com\"\n}"},
+            "url": "{{base_url}}/api/v1/customer/create"
+          }
+        },
+        {"name": "Update Customer",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {"mode":"raw","raw": "{}"},
+            "url": "{{base_url}}/api/v1/customer/update/:id"
+          }
+        },
+        {"name": "Delete Customer", "request": {"method": "DELETE", "url": "{{base_url}}/api/v1/customer/delete/:id"}}
+      ]
+    },
+    {
+      "name": "User & Auth",
+      "item": [
+        {"name": "Register", "request": {"method": "POST", "header":[{"key":"Content-Type","value":"application/json"}], "body":{"mode":"raw","raw":"{\n  \"email\": \"user@example.com\",\n  \"password\": \"secret\"\n}"}, "url": "{{base_url}}/api/v1/auth/create"}},
+        {"name": "Login", "request": {"method": "POST", "header":[{"key":"Content-Type","value":"application/json"}], "body":{"mode":"raw","raw":"{\n  \"email\": \"user@example.com\",\n  \"password\": \"secret\"\n}"}, "url": "{{base_url}}/api/v1/auth/login"}},
+        {"name": "Create PIN", "request": {"method": "POST", "url": "{{base_url}}/api/v1/auth/create-pin"}},
+        {"name": "Verify PIN", "request": {"method": "POST", "url": "{{base_url}}/api/v1/auth/verify-pin"}},
+        {"name": "User Profile", "request": {"method": "GET", "url": "{{base_url}}/api/v1/auth/user"}}
+      ]
+    },
+    {
+      "name": "Invoice",
+      "item": [
+        {"name": "List Invoices", "request": {"method": "GET", "url": "{{base_url}}/api/v1/invoice/get"}},
+        {"name": "Get Invoice", "request": {"method": "GET", "url": "{{base_url}}/api/v1/invoice/get/:id"}},
+        {"name": "Create Invoice", "request": {"method": "POST", "header":[{"key":"Content-Type","value":"application/json"}], "body":{"mode":"raw","raw":"{\n  \"title\": \"Produce Sale\",\n  \"amount\": 5000,\n  \"customerId\": \"<id>\"\n}"}, "url": "{{base_url}}/api/v1/invoice/create"}},
+        {"name": "Delete Invoice", "request": {"method": "DELETE", "url": "{{base_url}}/api/v1/invoice/delete/:id"}},
+        {"name": "Pay Invoice", "request": {"method": "POST", "url": "{{base_url}}/api/v1/invoice/payment"}}
+      ]
+    },
+    {
+      "name": "Products & News",
+      "item": [
+        {"name": "List Products", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/inc"}},
+        {"name": "Get Product", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/inc/:id"}},
+        {"name": "Create Product", "request": {"method": "POST", "header":[{"key":"Content-Type","value":"application/json"}], "body":{"mode":"raw","raw":"{\n  \"name\": \"Wheat\",\n  \"description\": \"grains\",\n  \"status\": \"ACTIVE\"\n}"}, "url": "{{base_url}}/api/v1/products/inc"}},
+        {"name": "Update Product", "request": {"method": "PATCH", "url": "{{base_url}}/api/v1/products/inc"}},
+        {"name": "Create News", "request": {"method": "POST", "url": "{{base_url}}/api/v1/products/news"}},
+        {"name": "List News", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/news"}},
+        {"name": "Get News", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/news/:id"}},
+        {"name": "Update News", "request": {"method": "PATCH", "url": "{{base_url}}/api/v1/products/news"}},
+        {"name": "Subscribe", "request": {"method": "POST", "url": "{{base_url}}/api/v1/products/subscription"}},
+        {"name": "Unsubscribe", "request": {"method": "DELETE", "url": "{{base_url}}/api/v1/products/subscription"}},
+        {"name": "Price List", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/prices"}},
+        {"name": "Create Price", "request": {"method": "POST", "url": "{{base_url}}/api/v1/products/prices"}},
+        {"name": "Get Price", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/prices/:id"}},
+        {"name": "Update Price", "request": {"method": "PATCH", "url": "{{base_url}}/api/v1/products/price"}},
+        {"name": "Price Graph", "request": {"method": "GET", "url": "{{base_url}}/api/v1/products/prices/graph/:id"}}
+      ]
+    },
+    {
+      "name": "Wallets",
+      "item": [
+        {"name": "Create Wallet", "request": {"method": "POST", "url": "{{base_url}}/api/v1/wallets"}},
+        {"name": "Get Wallet", "request": {"method": "GET", "url": "{{base_url}}/api/v1/wallets"}},
+        {"name": "Get Card", "request": {"method": "GET", "url": "{{base_url}}/api/v1/wallets/card"}},
+        {"name": "Request Card Holder", "request": {"method": "POST", "url": "{{base_url}}/api/v1/wallets/card/holder"}},
+        {"name": "Link Card", "request": {"method": "POST", "url": "{{base_url}}/api/v1/wallets/card/link"}},
+        {"name": "Transactions", "request": {"method": "GET", "url": "{{base_url}}/api/v1/wallets/transactions"}},
+        {"name": "Transfer", "request": {"method": "POST", "url": "{{base_url}}/api/v1/wallets/transfer"}},
+        {"name": "Freeze Card", "request": {"method": "POST", "url": "{{base_url}}/api/v1/wallets/freeze-card"}}
+      ]
+    },
+    {
+      "name": "Storage",
+      "item": [
+        {"name": "Upload File", "request": {"method": "POST", "url": "{{base_url}}/storage/upload"}},
+        {"name": "Get File", "request": {"method": "GET", "url": "{{base_url}}/storage/:filename"}}
+      ]
+    }
+  ]
+}

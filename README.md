@@ -39,3 +39,7 @@ npm run start:dev
 
 - `POST /api/v1/inventory/create` - Create a new inventory item
 - `PATCH /api/v1/inventory/update/:id` - Update an existing inventory item
+
+## Documentation
+
+Detailed API documentation is available in the [doc](doc/) directory. Import `doc/CropX.postman_collection.json` in Postman to try the endpoints.
