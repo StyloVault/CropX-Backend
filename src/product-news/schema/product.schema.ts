@@ -18,6 +18,11 @@ export class Product {
   @Prop({ type: Boolean, default: true })
   availabilityStatus: boolean;
 
+  // Indicates if this product was scraped from an external source and should
+  // be monitored for daily price updates automatically
+  @Prop({ type: Boolean, default: false })
+  isMonitored: boolean;
+
   @Prop({ type: String, required: true })
   productDescription: string;
 
@@ -55,10 +60,11 @@ export class ProductNews {
 }
 
 export const ProductNewsSchema = SchemaFactory.createForClass(ProductNews);
+ProductNewsSchema.index({ product: 1, createdAt: -1 });
 
 @Schema({ timestamps: true, collection: 'product_daily_prices' })
 export class ProductDailyPrices {
-  @Prop({ type: Types.ObjectId, ref: 'Product', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Product', required: true, index: true })
   product: Types.ObjectId;
 
   @Prop({
@@ -77,6 +83,9 @@ export class ProductDailyPrices {
 export const ProductDailyPricesSchema =
   SchemaFactory.createForClass(ProductDailyPrices);
 
+// Index to quickly fetch prices for a product ordered by creation date
+ProductDailyPricesSchema.index({ product: 1, createdAt: -1 });
+
 ProductDailyPricesSchema.set('toObject', { getters: true });
 ProductDailyPricesSchema.set('toJSON', { getters: true });
 
@@ -94,3 +103,4 @@ export class ProductSubscription {
 
 export const ProductSubscriptionSchema =
   SchemaFactory.createForClass(ProductSubscription);
+ProductSubscriptionSchema.index({ userId: 1, product: 1 });

@@ -6,6 +6,7 @@ export class ProductInterface extends Document {
   productImage: string;
   productLocation: string;
   availabilityStatus: boolean;
+  isMonitored: boolean;
 }
 
 export class ProductNewsInterface extends Document {
