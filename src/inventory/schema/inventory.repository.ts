@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { Inventory } from "./inventorySchema";
 import { InventoryDTO } from "../dto/inventoryDto";
 import { InventoryStatus } from "../enum/inventoryEnum";
@@ -9,7 +9,7 @@ import { InventoryStatus } from "../enum/inventoryEnum";
 export class InventoryRepository {
 
     constructor(
-      @InjectModel('Inventory') private readonly inventoryModel: Model<Inventory>,
+      @InjectModel('Inventory') private readonly inventoryModel: SoftDeleteModel<Inventory>,
     ){}
 
      public async createInventory(data : any) : Promise<Inventory> {
@@ -21,8 +21,8 @@ export class InventoryRepository {
        }
     
        public async getAll(query, sID: string |null = null) {
-  
-        let queryObject: any = {};
+
+        let queryObject: any = { deleted: { $ne: true } };
         let {status, search, page, limit, sort, fields, numericFilters } = query;
     
         if (status && !Object.values(InventoryStatus).includes(status))  {
@@ -113,14 +113,14 @@ export class InventoryRepository {
     }
     
     public async deleteSingleInventory(data: any) : Promise<void> {
-        
+
         const inventory =  await this.inventoryModel.findOne(data).exec()
 
         if(!inventory) {
             throw new Error('Inventory not found');
         }
 
-        await inventory.deleteOne();
+        await this.inventoryModel.softDelete({ _id: inventory._id });
     }
   
 
