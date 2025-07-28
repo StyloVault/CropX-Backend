@@ -8,6 +8,8 @@ import { RequestType } from "src/common/enums/RequestType";
 import { AppConfig } from "src/config.schema";
 import { InvoiceStatus } from "src/invoicing/enum/invoiceEnum";
 import { InvoiceRepository } from "src/invoicing/schema/invoiceRepository";
+import { ItemRepository } from "src/item/item.repository";
+import { InventoryRepository } from "src/inventory/schema/inventory.repository";
 
 
 
@@ -21,8 +23,12 @@ export class TransferWebhookAction {
      public payload : Object;
      public url : string = `${AppConfig.CARD_BASE_URL}/invoice/credit`;
 
-      constructor(private invoiceRepository :InvoiceRepository,
-              private apiCall : ApiCall) {}
+      constructor(
+              private invoiceRepository :InvoiceRepository,
+              private apiCall : ApiCall,
+              private itemRepository: ItemRepository,
+              private inventoryRepository: InventoryRepository,
+      ) {}
 
      async execute(request) {
 
@@ -55,11 +61,12 @@ export class TransferWebhookAction {
         return this
     }
 
-   async setPayload (request) {
+   setPayload(request): this {
     this.payload = {
         sID : this.invoice.business.id,
         amount : request.data['amount']
-    }  
+    }
+    return this;
    }
 
    async boot() {
@@ -80,7 +87,25 @@ export class TransferWebhookAction {
             status : InvoiceStatus.SETTLED,
             businessSettled : true
     });
-   }
+     await this.reduceInventory();
+  }
+
+  private async reduceInventory() {
+    for (const item of this.invoice.items) {
+      if (!item.id) continue;
+      try {
+        const invItem = await this.itemRepository.getItemById(item.id);
+        if (invItem?.inventoryId) {
+          await this.inventoryRepository.updateInventory(
+            { _id: invItem.inventoryId },
+            { $inc: { quantityAvailable: -item.quantity } },
+          );
+        }
+      } catch (e) {
+        // ignore errors to avoid failing webhook
+      }
+    }
+  }
  
 
    

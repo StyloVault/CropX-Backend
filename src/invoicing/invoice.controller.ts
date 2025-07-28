@@ -17,9 +17,16 @@ export class InvoiceController {
      async invoicePayment(@Req() req, @Body() {invoiceID: id}: IdDTO, @Res() res) {
       return await this.invoiceService.invoicePayment(id, res);  
  }
-    @Post('transfer') 
+    @Post('transfer')
     async invoiceTransfer(@Req() req, @Body() body, @Res() res) {
       return await this.invoiceService.transferWebhook(body, res);
+    }
+
+    @Post('manual-pay/:id')
+    @UseGuards(UserRolesGuard)
+    @Roles('User')
+    manualPay(@Param('id') id: string, @Res() res: Response) {
+      return this.invoiceService.manualPayment(id, res);
     }
     
     @Get('/get/') 

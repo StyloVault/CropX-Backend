@@ -41,6 +41,7 @@ import { PostmarkService } from './common/services/postmark.service';
 import { InventoryModule } from './inventory/inventory.module';
 import { ProductTransactionModule } from './product-transaction/product-transaction.module';
 import { InvoiceModule } from './invoicing/invoice.module';
+import { ItemModule } from './item/item.module';
 import { ProductsNewsModule } from './product-news/product-news.module';
 import { StorageModule } from './storage/storage.module';
 import { TransactionsModule } from './transactions/transactions.module';
@@ -88,6 +89,7 @@ const loggerMiddleware = (req: Request, res: Response, next: () => void) => {
     CardsModule,
     CustomerModule,
     HooksModule,
+    ItemModule,
   ],
   controllers: [AppController],
   providers: [AppService, GeneratePermission,PostmarkService,UsersService,CreateTeamAction, ToggleLogin,ApiResponse, UserRepository, PayGateService],
