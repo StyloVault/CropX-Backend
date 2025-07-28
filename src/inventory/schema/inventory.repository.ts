@@ -109,6 +109,7 @@ export class InventoryRepository {
     async updateInventory(search : any, data : any) {
         return await this.inventoryModel.findOneAndUpdate(search, data, {
             new: true,
+            runValidators: true,
         });
     }
     
