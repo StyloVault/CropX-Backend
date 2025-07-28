@@ -72,3 +72,4 @@ export const InventorySchema = SchemaFactory.createForClass(Inventory);
 
 InventorySchema.set('toObject', { getters: true });
 InventorySchema.set('toJSON', { getters: true });
+InventorySchema.index({ businessId: 1, productId: 1 }, { unique: true });
