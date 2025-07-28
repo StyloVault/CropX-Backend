@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Types } from "mongoose";
+import { Document, Types } from "mongoose";
+import { softDeletePlugin } from 'soft-delete-plugin-mongoose';
 import { InventoryStatus } from "../enum/inventoryEnum";
+
+export type InventoryDocument = Inventory & Document;
 
 
 @Schema({timestamps: true, collection:'inventory'})
@@ -69,7 +72,7 @@ export class Inventory {
 
 export const InventorySchema = SchemaFactory.createForClass(Inventory);
 
-
+InventorySchema.plugin(softDeletePlugin);
 InventorySchema.set('toObject', { getters: true });
 InventorySchema.set('toJSON', { getters: true });
 InventorySchema.index({ businessId: 1, productId: 1 }, { unique: true });
