@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsMongoId,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
 import { Types } from 'mongoose';
@@ -28,7 +29,8 @@ export class NewProductDto {
 
 export class NewProductNewsDto {
   @IsMongoId()
-  product: Types.ObjectId;
+  @IsOptional()
+  product?: Types.ObjectId;
 
   @IsString()
   newsTopic: string;

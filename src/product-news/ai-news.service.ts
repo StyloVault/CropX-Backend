@@ -4,6 +4,12 @@ import { OpenAIService } from '../common/services/openai.service';
 import { ProductsNewsService } from './product-news.service';
 
 interface NewsLink { title: string; url: string; }
+interface NewsSummary {
+  title: string;
+  summary: string;
+  link: string;
+  image: string;
+}
 
 @Injectable()
 export class AiNewsService {
@@ -15,7 +21,7 @@ export class AiNewsService {
 
   async processDailyNews(links: NewsLink[]): Promise<void> {
     const limitedLinks = links.slice(0, 10);
-    const summaries = [];
+    const summaries: NewsSummary[] = [];
     for (const link of limitedLinks) {
       try {
         const resp = await axios.get(link.url);
@@ -30,7 +36,6 @@ export class AiNewsService {
     const top3 = summaries.slice(0, 3);
     for (const news of top3) {
       await this.newsService.createNews({
-        product: null,
         newsTopic: news.title,
         newsBody: news.summary,
         images: [news.image],
