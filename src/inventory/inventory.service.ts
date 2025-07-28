@@ -96,7 +96,7 @@ export class InventoryService {
     }
    async deleteOneInventory(id : string, sID: string, res: Response) {
       try {
-         await this.inventoryRepository.deleteSingleInventory({id, businessID : sID})
+         await this.inventoryRepository.deleteSingleInventory({_id: id, businessId: sID})
          return this.apiResponse.success(res, 'Inventory deleted successfully', [])
       }catch(error) {
         return this.apiResponse.failure(res, error.message, [], error.statusCode)
@@ -138,7 +138,7 @@ export class InventoryService {
    
        async deleteInventory(id : string, sID: string, res: Response) {
          try {
-            await this.inventoryRepository.deleteSingleInventory({_id:id, businessID : sID})
+            await this.inventoryRepository.deleteSingleInventory({_id:id, businessId : sID})
             return this.apiResponse.success(res, 'inventory  deleted successfully', [])
          }catch(error) {
            return this.apiResponse.failure(res, error.message, error, error.statusCode)
