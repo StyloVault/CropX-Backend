@@ -19,8 +19,8 @@ export class Inventory {
     @Prop({ type: String })
     description : string
 
-     @Prop({type : String, required: true})
-     businessId : string
+     @Prop({type : Types.ObjectId, ref: 'Business', required: true})
+     businessId : Types.ObjectId
 
      @Prop({ type: String })
      productImage: string;

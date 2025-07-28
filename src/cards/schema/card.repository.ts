@@ -22,7 +22,7 @@ export class CardRepository {
     
     async fetchCards(data: Record<string, any>, query: Record<string, any>) {
   try {
-    const subUser = this.cardModel.find(data);
+    const subUser = this.cardModel.find(data).populate('user');
     let { page, limit } = query;
     page = Number(page) || 1;
     limit = Number(limit) || 10;
@@ -62,7 +62,7 @@ export class CardRepository {
 
     
     async getSingleCard(data) {
-      return await this.cardModel.findOne(data).exec();
+      return await this.cardModel.findOne(data).populate('user').exec();
     }
   
     async updateCard(search, data) {
@@ -76,18 +76,27 @@ export class CardRepository {
     }
 
     async getSingleCardRequest(data) {
-      return await this.cardRequestModel.findOne(data).populate('card').exec();
+      return await this.cardRequestModel
+        .findOne(data)
+        .populate('card')
+        .populate('user')
+        .exec();
     }
 
     async updateCardRequest(search, data) {
-      return await this.cardRequestModel.findOneAndUpdate(search, data, {new: true})
-                                      .populate('card')
-                                      .exec();
+      return await this.cardRequestModel
+        .findOneAndUpdate(search, data, { new: true })
+        .populate('card')
+        .populate('user')
+        .exec();
     }
 
     async fetchCardRequests(data, query) {
       try {
-        const subUser = this.cardRequestModel.find(data).populate('card');
+        const subUser = this.cardRequestModel
+          .find(data)
+          .populate('card')
+          .populate('user');
         let { page, limit } = query;
         page = Number(page) || 1;
         limit = Number(limit) || 10;

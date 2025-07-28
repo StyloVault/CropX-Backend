@@ -64,7 +64,9 @@ export class InventoryRepository {
           });
       
         }
-        let result :any = this.inventoryModel.find(queryObject);
+        let result :any = this.inventoryModel
+          .find(queryObject)
+          .populate('businessId');
       
         if (sort) {
           const sortList = sort.split(',').join(' ');
@@ -98,7 +100,10 @@ export class InventoryRepository {
       
     
     async getSingleInventory(data : any) {
-        const inventory = await this.inventoryModel.findOne(data).exec();
+        const inventory = await this.inventoryModel
+          .findOne(data)
+          .populate('businessId')
+          .exec();
         if(!inventory) {
             throw new Error('inventory not found');
         }

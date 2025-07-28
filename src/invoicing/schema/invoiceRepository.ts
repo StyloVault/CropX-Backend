@@ -77,7 +77,9 @@ export class InvoiceRepository {
       });
   
     }
-    let result :any = this.invoiceModel.find(queryObject);
+    let result :any = this.invoiceModel
+      .find(queryObject)
+      .populate('customer');
   
     if (sort) {
       const sortList = sort.split(',').join(' ');
@@ -108,7 +110,9 @@ export class InvoiceRepository {
   }
   
   public async getOne(id: string) : Promise<Invoice> {
-     const invoice =  await this.invoiceModel.findById(id)
+     const invoice =  await this.invoiceModel
+      .findById(id)
+      .populate('customer')
 
      if(!invoice) {
         throw new Error('Invoice not found');
@@ -117,7 +121,10 @@ export class InvoiceRepository {
   }
 
     async getSingleInvoice(data) {
-        const invoice =  await this.invoiceModel.findOne(data).exec();
+        const invoice =  await this.invoiceModel
+          .findOne(data)
+          .populate('customer')
+          .exec();
 
         if(!invoice) {
           throw new Error('Invoice not found');
