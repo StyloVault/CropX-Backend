@@ -49,6 +49,14 @@ export class InventoryController {
       return this.inventoryService.updateInventory(req.decoded, id,body, res)
 }
 
+  @Get('/summary')
+  @UseGuards(UserRolesGuard)
+  @Roles('User', 'Company')
+  getSummary(@Req() req, @Res() res: Response) {
+      const {sID} = req.decoded
+      return this.inventoryService.getSummary(sID, res)
+  }
+
 
   // Admin 
 

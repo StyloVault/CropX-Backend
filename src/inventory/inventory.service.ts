@@ -103,6 +103,15 @@ export class InventoryService {
      }
    }
 
+   async getSummary(sID: string, res: Response) {
+      try {
+         const summary = await this.inventoryRepository.inventorySummary(sID);
+         return this.apiResponse.success(res, 'Inventories retrieved successfully', summary);
+      } catch (error) {
+         return this.apiResponse.failure(res, error.message, [], error.statusCode);
+      }
+   }
+
 
        //Admin Endpoints 
 

@@ -122,6 +122,42 @@ export class InventoryRepository {
 
         await inventory.deleteOne();
     }
+
+    async inventorySummary(businessId: string) {
+        const active = await this.inventoryModel.countDocuments({
+            businessId,
+            status: InventoryStatus.ACTIVE,
+        }).exec();
+
+        const inactive = await this.inventoryModel.countDocuments({
+            businessId,
+            status: InventoryStatus.INACTIVE,
+        }).exec();
+
+        const outOfStock = await this.inventoryModel.countDocuments({
+            businessId,
+            status: InventoryStatus.OUTOFSTOCK,
+        }).exec();
+
+        const totals = await this.inventoryModel.aggregate([
+            { $match: { businessId } },
+            {
+                $group: {
+                    _id: null,
+                    totalQuantity: { $sum: '$quantityAvailable' },
+                    totalCost: {
+                        $sum: {
+                            $multiply: ['$costPrice', '$quantityAvailable'],
+                        },
+                    },
+                },
+            },
+        ]);
+
+        const { totalQuantity = 0, totalCost = 0 } = totals[0] || {};
+
+        return { active, inactive, outOfStock, totalQuantity, totalCost };
+    }
   
 
     
