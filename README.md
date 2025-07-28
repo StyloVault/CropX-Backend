@@ -33,3 +33,9 @@ npm install
 
 # Run locally
 npm run start:dev
+```
+
+## API Endpoints
+
+- `POST /api/v1/inventory/create` - Create a new inventory item
+- `PATCH /api/v1/inventory/update/:id` - Update an existing inventory item

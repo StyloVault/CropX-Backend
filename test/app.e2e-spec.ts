@@ -22,4 +22,10 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/api/v1/inventory/update/:id (PATCH)', () => {
+    return request(app.getHttpServer())
+      .patch('/api/v1/inventory/update/test')
+      .expect(401);
+  });
 });

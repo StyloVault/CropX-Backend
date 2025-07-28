@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Req, Res, UseGuards, Patch } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { Roles } from 'src/common/decorator/roles';
 import { UserRolesGuard } from 'src/common/roles/user.roles';
@@ -42,7 +42,7 @@ export class InventoryController {
         return this.inventoryService.createInventory(req.decoded, body, res)
   }
 
-  @Post('/update/:id')
+  @Patch('/update/:id')
   @UseGuards(UserRolesGuard)
   @Roles('User', 'Company')
   updateInventory(@Req() req, @Body() body : InventoryDTO,  @Param('id') id :string, @Res() res) {
