@@ -18,7 +18,10 @@ export class TransactionRepository {
     
       async fetchTransactions(data, query) {
         try {
-          const subUser = this.transactionModel.find(data);
+          const subUser = this.transactionModel
+            .find(data)
+            .populate('user')
+            .populate('card');
           let { page, limit } = query;
           page = Number(page) || 1;
           limit = Number(limit) || 10;
@@ -49,7 +52,11 @@ export class TransactionRepository {
       }
     
       async getSingleTransaction(data) {
-        return await this.transactionModel.findOne(data).exec();
+        return await this.transactionModel
+          .findOne(data)
+          .populate('user')
+          .populate('card')
+          .exec();
       }
     
       async updateTransaction(search, data) {

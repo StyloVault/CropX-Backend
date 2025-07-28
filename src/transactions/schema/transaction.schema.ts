@@ -4,7 +4,7 @@ import { TransactionStatus, TransactionType } from "../dto/transaction.enum";
 
 @Schema({timestamps: true, collection:'transactions'})
 export class Transaction {
-    @Prop({type: Types.ObjectId, required: true})
+    @Prop({type: Types.ObjectId, ref: 'User', required: true})
     user: Types.ObjectId;
 
     @Prop({type: Types.ObjectId, ref: 'Card'})

@@ -4,7 +4,7 @@ import { BankName, CardDeliveryStatus } from '../interface/card.enum';
 
 @Schema({timestamps: true, collection:'cards'})
 export class Card {
-    @Prop({ type: Types.ObjectId, require: true, unique: true})
+    @Prop({ type: Types.ObjectId, ref: 'User', require: true, unique: true})
     user: Types.ObjectId;
 
     @Prop({ type: Object })
@@ -49,8 +49,8 @@ CardSchema.set('toJSON', { getters: true });
 export class CardRequest {
   @Prop({type: Types.ObjectId, ref: 'Card'})
   card: Types.ObjectId;
-  
-  @Prop({type: Types.ObjectId })
+
+  @Prop({type: Types.ObjectId, ref: 'User'})
   user: Types.ObjectId;
 
   @Prop({type: Object, required: true})
