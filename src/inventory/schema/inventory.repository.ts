@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { Inventory } from "./inventorySchema";
+import { Inventory, InventoryDocument } from "./inventorySchema";
 import { InventoryDTO } from "../dto/inventoryDto";
 import { InventoryStatus } from "../enum/inventoryEnum";
 
@@ -9,7 +9,7 @@ import { InventoryStatus } from "../enum/inventoryEnum";
 export class InventoryRepository {
 
     constructor(
-      @InjectModel('Inventory') private readonly inventoryModel: SoftDeleteModel<Inventory>,
+      @InjectModel('Inventory') private readonly inventoryModel: SoftDeleteModel<InventoryDocument>,
     ){}
 
      public async createInventory(data : any) : Promise<Inventory> {

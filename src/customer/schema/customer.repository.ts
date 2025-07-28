@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Customer } from './customer.schema';
+import { Customer, CustomerDocument } from './customer.schema';
 
 @Injectable()
 export class CustomerRepository {
   constructor(
-    @InjectModel(Customer.name) private readonly customerModel: Model<Customer>,
+    @InjectModel(Customer.name) private readonly customerModel: Model<CustomerDocument>,
   ) {}
 
   async createCustomer(data: any): Promise<Customer> {
@@ -49,11 +49,11 @@ export class CustomerRepository {
     };
   }
 
-  async getSingleCustomer(data: any): Promise<Customer> {
+  async getSingleCustomer(data: any): Promise<Customer | null> {
     return await this.customerModel.findOne(data).exec();
   }
 
-  async updateCustomer(search: any, data: any): Promise<Customer> {
+  async updateCustomer(search: any, data: any): Promise<Customer | null> {
     return await this.customerModel.findOneAndUpdate(search, data, { new: true });
   }
 
