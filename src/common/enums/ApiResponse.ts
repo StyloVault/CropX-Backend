@@ -1,5 +1,5 @@
 export enum ApiResponseEnum {
-    StatusSuccess='sucess',
+    StatusSuccess='success',
     StatusFailed='failed',
 }
 
