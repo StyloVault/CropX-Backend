@@ -9,6 +9,7 @@ import { AuthMiddleware } from 'src/common/middleware/auth.middleware';
 import { ProductUnit, ProductUnitSchema, Transaction, TransactionSchema } from 'src/product-transaction/schema/transactionSchema';
 import { Activity, ActivitySchema } from 'src/common/activity/activity.schema';
 import { ActivityRepository } from './../common/activity/activity.repository';
+import { ItemModule } from 'src/item/item.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { ActivityRepository } from './../common/activity/activity.repository';
       {name: ProductUnit.name, schema: ProductUnitSchema},
       {name: Inventory.name, schema: InventorySchema},
       {name : Activity.name, schema : ActivitySchema}
-    ]), 
+    ]),
+    ItemModule
   ],
   providers: [InventoryService,ActivityRepository, InventoryRepository, ApiResponse],
   controllers: [InventoryController],

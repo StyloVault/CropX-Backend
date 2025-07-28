@@ -5,13 +5,15 @@ import { InventoryDTO } from './dto/inventoryDto';
 import { Response } from 'express';
 import { ActivityRepository } from 'src/common/activity/activity.repository';
 import { Types } from 'mongoose';
+import { ItemRepository } from 'src/item/item.repository';
 
 @Injectable()
 export class InventoryService {
 
-    constructor(private inventoryRepository : InventoryRepository, 
-      private activityRepository : ActivityRepository, 
-        private apiResponse : ApiResponse ,
+    constructor(private inventoryRepository : InventoryRepository,
+      private activityRepository : ActivityRepository,
+      private apiResponse : ApiResponse,
+      private itemRepository: ItemRepository,
 
   ){}
 
@@ -20,6 +22,14 @@ export class InventoryService {
            const {sID, userId} = decoded
             const payload = this.preparePayload(sID, body);
             const inventory = await this.inventoryRepository.createInventory(payload);
+            await this.itemRepository.upsertItem({ inventoryId: inventory._id }, {
+                name: inventory.name,
+                description: inventory.description,
+                unitOfMeasure: inventory.unitOfMeasure,
+                price: inventory.sellingPrice,
+                businessId: inventory.businessId,
+                inventoryId: inventory._id,
+            });
             this.createActivity(inventory, userId, sID, "Created Inventory")
             return this.apiResponse.success(res, 'Inventory created successfully', inventory, 201)
         }catch (error) {
@@ -33,6 +43,14 @@ export class InventoryService {
          const {sID, userId} = decoded
          const payload = this.preparePayload(sID, body);
           const inventory = await this.inventoryRepository.updateInventory({_id : id, businessId: sID},payload);
+          await this.itemRepository.upsertItem({ inventoryId: inventory._id }, {
+                name: inventory.name,
+                description: inventory.description,
+                unitOfMeasure: inventory.unitOfMeasure,
+                price: inventory.sellingPrice,
+                businessId: inventory.businessId,
+                inventoryId: inventory._id,
+          });
           this.updateActivity(inventory, userId, sID, 'Updated Inventory')
           return this.apiResponse.success(res, 'Inventory updated successfully', inventory, 200)
       }catch (error) {
