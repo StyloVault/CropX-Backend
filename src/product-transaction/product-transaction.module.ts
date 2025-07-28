@@ -14,6 +14,7 @@ import { Activity, ActivitySchema } from 'src/common/activity/activity.schema';
 import { ActivityRepository } from './../common/activity/activity.repository';
 import { ProductTransactionService } from './product-transaction.service';
 import { ProductTransactionController } from './product-transaction.controller';
+import { PayGateService } from 'src/common/services/pagate.service';
 
 @Module({
     imports: [
@@ -25,7 +26,17 @@ import { ProductTransactionController } from './product-transaction.controller';
         ]), 
       ],
     controllers: [ProductTransactionController],
-    providers: [ProductTransactionService,InventoryRepository,ActivityRepository,ApiResponse, CreateTransactionAction,LowStockEvent, OutOfStockEvent, TransactionRepository]
+    providers: [
+      ProductTransactionService,
+      InventoryRepository,
+      ActivityRepository,
+      ApiResponse,
+      CreateTransactionAction,
+      LowStockEvent,
+      OutOfStockEvent,
+      TransactionRepository,
+      PayGateService,
+    ]
 })
 export class ProductTransactionModule {
   configure(consumer: MiddlewareConsumer) {
