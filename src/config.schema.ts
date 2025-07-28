@@ -12,4 +12,5 @@ export const configValidationSchema = Joi.object({
   BUGSNAG_KEY: Joi.string().required(),
   POSTMARK_API_KEY: Joi.string().required(),
   OPENAI_KEY: Joi.string().optional(),
+  DAILY_NEWS_LINKS: Joi.string().optional(),
 });
