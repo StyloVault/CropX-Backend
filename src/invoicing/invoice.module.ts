@@ -12,11 +12,13 @@ import { AxiosInterceptor } from 'src/common/services/axios.service';
 import { TransferWebhookAction } from 'src/Actions/transferWebhook';
 import { Utils } from 'src/common/Helper/Utils';
 import { SafeHaveService } from 'src/common/services/safehaven.service';
+import { CustomerModule } from 'src/customer/customer.module';
 @Module({
     imports: [
         MongooseModule.forFeature([
           {name: Invoice.name, schema: InvoiceSchema},
-        ])
+        ]),
+        CustomerModule,
       ],
     controllers: [InvoiceController],
     providers: [InvoiceRepository,CronJob, InvoiceService, AxiosInterceptor, TransferWebhookAction, ApiResponse, ApiCall,Utils, SafeHaveService]

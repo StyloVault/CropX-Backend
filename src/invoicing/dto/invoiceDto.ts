@@ -1,5 +1,5 @@
-import { IsString, IsObject, IsDate, IsInt,IsEmail, IsNumberString, IsOptional,  IsNumber, ValidateNested, IsBoolean , validate, IsArray} from 'class-validator';
-import { Type,Transform,plainToClass } from 'class-transformer';
+import { IsString, IsObject, IsInt, IsNumber, IsOptional, ValidateNested, IsBoolean, IsArray } from 'class-validator';
+import { Type, Transform, plainToClass } from 'class-transformer';
 
 export class CustomerDTO {
     @IsString()
@@ -60,10 +60,8 @@ export class InvoiceDTO {
     @IsObject()
     business: BusinessDTO;
 
-    @ValidateNested()
-    @Type(() => CustomerDTO)
-    @IsObject()
-    customer: CustomerDTO;
+    @IsString()
+    customerId: string;
 
     @IsString()
     title: string;

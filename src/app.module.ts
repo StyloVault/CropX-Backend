@@ -46,6 +46,7 @@ import { StorageModule } from './storage/storage.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CardsModule } from './cards/cards.module';
 import { HooksModule } from './hooks/hooks.module';
+import { CustomerModule } from './customer/customer.module';
 
 if (AppConfig.APP_ENV === 'development') {
   mongoose.set('debug', true);
@@ -85,6 +86,7 @@ const loggerMiddleware = (req: Request, res: Response, next: () => void) => {
     StorageModule,
     TransactionsModule,
     CardsModule,
+    CustomerModule,
     HooksModule,
   ],
   controllers: [AppController],

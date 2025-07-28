@@ -9,14 +9,8 @@ export class Invoice {
     @Prop({ type: String })
     invoiceId : string
 
-    @Prop({type: Object, required :  true})
-    customer: {
-        name : string
-        email :  string
-        phone : string
-        billingAddress :  string
-        deliveryAddress :  string
-     };
+    @Prop({ type: Types.ObjectId, ref: 'Customer', required: true })
+    customer: Types.ObjectId;
 
      @Prop({type : Object})
      business : {
