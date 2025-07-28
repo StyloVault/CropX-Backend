@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 import { AppConfig } from '../../config.schema';
 
 @Injectable()
 export class OpenAIService {
-  private readonly openai: OpenAIApi;
+  private readonly openai: OpenAI;
 
   constructor() {
-    const configuration = new Configuration({ apiKey: AppConfig.OPENAI_KEY });
-    this.openai = new OpenAIApi(configuration);
+    this.openai = new OpenAI({ apiKey: AppConfig.OPENAI_KEY });
   }
 
   async summarize(text: string): Promise<string> {
-    const completion = await this.openai.createChatCompletion({
+    const completion = await this.openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [{ role: 'user', content: `Summarize this news:\n${text}` }],
       max_tokens: 200,
@@ -21,13 +20,13 @@ export class OpenAIService {
   }
 
   async generateImage(prompt: string): Promise<string> {
-    const image = await this.openai.createImage({
+    const image = await this.openai.images.generate({
       prompt,
       n: 1,
       size: '1024x1024',
       model: 'dall-e-3',
       style: 'vivid',
     });
-    return image.data.data[0]?.url || '';
+    return image.data[0]?.url || '';
   }
 }

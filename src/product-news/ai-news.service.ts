@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { OpenAIService } from '../common/services/openai.service';
 import { ProductsNewsService } from './product-news.service';
+import { Types } from 'mongoose';
 
 interface NewsLink { title: string; url: string; }
 
@@ -15,7 +16,7 @@ export class AiNewsService {
 
   async processDailyNews(links: NewsLink[]): Promise<void> {
     const limitedLinks = links.slice(0, 10);
-    const summaries = [];
+    const summaries: { link: string; summary: string; title: string; image: string }[] = [];
     for (const link of limitedLinks) {
       try {
         const resp = await axios.get(link.url);
@@ -30,7 +31,7 @@ export class AiNewsService {
     const top3 = summaries.slice(0, 3);
     for (const news of top3) {
       await this.newsService.createNews({
-        product: null,
+        product: undefined as unknown as Types.ObjectId,
         newsTopic: news.title,
         newsBody: news.summary,
         images: [news.image],
