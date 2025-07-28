@@ -332,6 +332,30 @@ export class ProductRepository {
     return this.productSubscriptionModel.deleteOne(search).exec();
   }
 
+  /**
+   * Creates or updates today's price entry for a product.
+   */
+  async upsertTodayPrice(productId: Types.ObjectId, price: number) {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const existing = await this.productDailyPriceModel.findOne({
+      product: productId,
+      createdAt: { $gte: startOfDay },
+    });
+
+    if (existing) {
+      existing.currentPrice = price;
+      await existing.save();
+      return existing;
+    }
+
+    return await new this.productDailyPriceModel({
+      product: productId,
+      currentPrice: price,
+    }).save();
+  }
+
   async setDailyProductPrice() {
     const today = new Date();
     const yesterday = new Date(today);

@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsMongoId,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
 import { Types } from 'mongoose';
@@ -21,6 +22,10 @@ export class NewProductDto {
   productLocation: string;
 
   availabilityStatus: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  isMonitored?: boolean;
 
   @IsString()
   unitOfMeasure: string;

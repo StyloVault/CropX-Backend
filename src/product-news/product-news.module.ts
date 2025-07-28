@@ -22,6 +22,8 @@ import { ProductsNewsController } from './product-news.controller';
 import { ProductsNewsService } from './product-news.service';
 import { AiNewsService } from './ai-news.service';
 import { OpenAIService } from '../common/services/openai.service';
+import { ProductScraperService } from './scraper.service';
+import { CronJob } from './internal/cron';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { OpenAIService } from '../common/services/openai.service';
     ImageStorage,
     OpenAIService,
     AiNewsService,
+    ProductScraperService,
+    CronJob,
   ],
 })
 export class ProductsNewsModule {

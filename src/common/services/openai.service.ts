@@ -29,4 +29,12 @@ export class OpenAIService {
     });
     return image.data?.[0]?.url || '';
   }
+
+  /**
+   * Performs a generic chat completion request. Returns the raw message content.
+   */
+  async chat(params: OpenAI.Chat.ChatCompletionCreateParams): Promise<string> {
+    const completion = await this.openai.chat.completions.create(params);
+    return completion.choices[0].message?.content?.trim() || '';
+  }
 }
