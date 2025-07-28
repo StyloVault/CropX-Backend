@@ -11,4 +11,5 @@ export const configValidationSchema = Joi.object({
   MONGODB_URL: Joi.string().required(),
   BUGSNAG_KEY: Joi.string().required(),
   POSTMARK_API_KEY: Joi.string().required(),
+  OPENAI_KEY: Joi.string().optional(),
 });

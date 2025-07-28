@@ -295,13 +295,14 @@ import {
       console.log(membership);
   
       const payload = {
+        businessId: membership?.business._id,
         sID: membership?.business._id,
         userId: user._id,
         membershipId: membership?._id,
         userRole: user.userRole,
         adminRole: user?.adminRole,
         usage: 'LOGIN',
-        business_name: membership?.business.name
+        business_name: membership?.business.name,
       };
       console.log(payload
         )
@@ -310,12 +311,13 @@ import {
       });
   
       const refreshPayload = {
+        businessId: membership?.business._id,
         sID: membership?.business._id,
         userId: user._id,
         membershipId: membership?._id,
         userRole: user.userRole,
         usage: 'refresh',
-        business_name: membership?.business.name
+        business_name: membership?.business.name,
       };
   
       const refreshToken = await jwt.sign(refreshPayload, AppConfig.JWT_SECRET, {
@@ -909,6 +911,7 @@ import {
       }
   
       const payload = {
+        businessId: membership?.business._id,
         sID: membership?.business._id,
         userId: user._id,
         membershipId: membership?._id,
@@ -922,6 +925,7 @@ import {
       });
   
       const refreshPayload = {
+        businessId: membership?.business._id,
         sID: membership?.business._id,
         userId: user._id,
         membershipId: membership?._id,

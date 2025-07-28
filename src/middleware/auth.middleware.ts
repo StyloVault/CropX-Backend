@@ -30,7 +30,7 @@ export class AuthMiddleware implements NestMiddleware {
 
     if (decodedToken == null)
       throw new UnauthorizedException('Token not valid for resource');
-    const { sID, userId, membershipId, userRole, usage } = decodedToken;
+    const { businessId, sID, userId, membershipId, userRole, usage } = decodedToken;
 
     if (usage !== 'LOGIN' && usage !== 'TRANSPORT') {
       throw new UnauthorizedException('User not Authorized');
@@ -48,7 +48,9 @@ export class AuthMiddleware implements NestMiddleware {
       decodedToken.membershipId = new Types.ObjectId(membershipId)
     }
 
-    decodedToken.sID = new Types.ObjectId(sID)
+    const tenant = businessId || sID;
+    decodedToken.sID = new Types.ObjectId(tenant);
+    decodedToken.businessId = new Types.ObjectId(tenant);
     console.log(decodedToken)
     req.decoded = decodedToken;
     next();
