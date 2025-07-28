@@ -8,6 +8,7 @@ export type InventoryDocument = Inventory & Document;
 
 @Schema({timestamps: true, collection:'inventory'})
 export class Inventory {
+    _id: Types.ObjectId;
     
     @Prop({ type: String })
     id : string
