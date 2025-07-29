@@ -3,6 +3,7 @@
 This directory contains documentation for CropX Backend APIs and development workflow.
 
 - [Inventory](inventory.md)
+- [Item](item.md)
 - [Customer](customer.md)
 - [User & Auth](user.md)
 - [Invoicing](invoice.md)

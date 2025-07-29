@@ -9,6 +9,7 @@ Base URL: `/api/v1/invoice`
 | GET | `/get` | List invoices for the user |
 | GET | `/get/:id` | Retrieve a single invoice |
 | DELETE | `/delete/:id` | Delete an invoice |
+| POST | `/manual-pay/:id` | Mark invoice as paid manually |
 | POST | `/create` | Create a new invoice |
 
 ### Enums
