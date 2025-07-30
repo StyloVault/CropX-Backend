@@ -1,4 +1,4 @@
-import { IsMongoId, IsNotEmpty, IsNumber,ValidateNested,IsObject, IsEnum, IsNumberString, IsString, IsOptional } from 'class-validator'
+import { IsMongoId, IsNotEmpty, IsNumber,ValidateNested,IsObject, IsEnum, IsNumberString, IsString, IsOptional, MinLength, MaxLength } from 'class-validator'
 import { Types } from 'mongoose';
 import { Type } from 'class-transformer';
 import { StatusEnum } from '../interface/card.enum';
@@ -29,6 +29,11 @@ export class TransferDto {
     narration?: string;
     @IsNumber()
     amount: number;
+
+    @IsNumberString()
+    @MinLength(4)
+    @MaxLength(4)
+    pin: string;
 }
 
 class UserDataDto {

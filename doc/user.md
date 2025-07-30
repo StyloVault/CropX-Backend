@@ -11,6 +11,8 @@ Key endpoints include:
 | GET | `/user` | Get profile of authenticated user |
 | POST | `/verify-pin` | Verify transaction pin |
 | POST | `/create-pin` | Create transaction pin |
+| POST | `/add-pin` | Set transaction pin on user record |
+| POST | `/change-pin` | Change existing transaction pin |
 | POST | `/reset-password` | Request password reset |
 | POST | `/new-password` | Complete password reset |
 | PATCH | `/business/:businessId` | Update a business |

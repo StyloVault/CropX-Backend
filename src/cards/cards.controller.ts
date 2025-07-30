@@ -58,8 +58,9 @@ export class CardsController {
   @UseGuards(UserRolesGuard)
   @Roles('User', 'Company')
   transferFund(@Body() body: TransferDto, @Req() req) {
-    const { sID, membershipId } = req.decoded;
-    return this.cardService.transfer(sID, body);
+    const { sID } = req.decoded;
+    const user = req.user;
+    return this.cardService.transfer(sID, body, user);
   }
 
   @Post('card/holder')

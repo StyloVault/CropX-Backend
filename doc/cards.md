@@ -25,7 +25,10 @@ Admin routes under `/admin/*` allow management of wallets and card requests.
 ### Example: Transfer Funds
 ```json
 {
+  "nameEnquiryReference": "ref123",
+  "beneficiaryBankCode": "000",
+  "beneficiaryAccountNumber": "1234567890",
   "amount": 2000,
-  "toAccount": "1234567890"
+  "pin": "1234"
 }
 ```
