@@ -6,6 +6,7 @@ import { AppConfig } from 'src/config.schema';
 import { TransactionStatus, TransactionType } from 'src/transactions/dto/transaction.enum';
 import { TransactionRepository } from 'src/transactions/schema/transactionrepository';
 import { CardDto, StatusDto } from './dto/card.dto';
+import { UserInterface } from 'src/user/interface/user.interface';
 import { BankName, CardDeliveryStatus, StatusEnum } from './interface/card.enum';
 import { CardRepository } from './schema/card.repository';
 import { Response } from 'express';
@@ -13,6 +14,7 @@ import { ApiResponse } from 'src/common/Helper/apiResponse';
 import { error } from 'console';
 import { SafeHaveService } from 'src/common/services/safehaven.service';
 import { SudoService } from 'src/common/services/sudo.service';
+import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
@@ -196,28 +198,33 @@ export class CardsService {
         beneficiaryBankCode: string;
         beneficiaryAccountNumber: string;
         narration?: string;
-        amount: number;}) {
+        amount: number;
+        pin: string;}, user: UserInterface) {
             console.log(data)
+            if(!user.pin) throw new UnauthorizedException('Transaction pin not set');
+            const validPin = await bcrypt.compare(data.pin, user.pin);
+            if(!validPin) throw new UnauthorizedException('Invalid transaction pin');
             if(!isPositiveInteger(data.amount) || !isValidAmount(data.amount)) throw new BadRequestException('Unauthorized amount');
+            const { pin, ...transferData } = data;
             const cardInfo =  await this.cardRepository.getSingleCard({user: userID, suspend: false})
             if(!cardInfo) throw new UnauthorizedException('User not Authorized for transfer');
-            const debitAmount = this.tranasctionAmount(data.amount, 10);
+            const debitAmount = this.tranasctionAmount(transferData.amount, 10);
             const koboAmount = amountToKobo(debitAmount)
             console.log(koboAmount, debitAmount)
                 if (cardInfo.accountBalance < koboAmount) {
                     throw new BadRequestException('You currently do not have sufficient balance')
-                }   
+                }
             // Create Transfer record
             const transfer = await this.transactionRepository.createTransaction({
                 user : userID,
                 card: cardInfo._id,
-                amount: Number(data.amount),
+                amount: Number(transferData.amount),
                 previousBalance :  cardInfo.accountBalance,
                 newBalance : Number(cardInfo.accountBalance)
                  - Number(debitAmount),
                 charges: 10,
                 transactionType: TransactionType.EXTERNAL_TRANSFER,
-                bankInfo: data,
+                bankInfo: transferData,
 
             })
           // Debit customer
@@ -228,11 +235,11 @@ export class CardsService {
 
             // Transfer
             const safeHavenResponse = await this.safeHavenService.transfer({
-                nameEnquiryReference: data.nameEnquiryReference,
-                beneficiaryAccountNumber: data.beneficiaryAccountNumber,
-                beneficiaryBankCode: data.beneficiaryBankCode,
-                narration: data.narration,
-                amount: data.amount,
+                nameEnquiryReference: transferData.nameEnquiryReference,
+                beneficiaryAccountNumber: transferData.beneficiaryAccountNumber,
+                beneficiaryBankCode: transferData.beneficiaryBankCode,
+                narration: transferData.narration,
+                amount: transferData.amount,
                 paymentReference: transfer._id,
                 saveBeneficiary: false
             })
