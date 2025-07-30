@@ -7,7 +7,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthMiddleware } from 'src/common/middleware/auth.middleware';
 import { ApiResponse } from 'src/common/Helper/apiResponse';
 import { CronJob } from './internal/cron';
-import { ApiCall } from 'src/common/Helper/ApiCall';
 import { AxiosInterceptor } from 'src/common/services/axios.service';
 import { TransferWebhookAction } from 'src/Actions/transferWebhook';
 import { Utils } from 'src/common/Helper/Utils';
@@ -15,17 +14,34 @@ import { SafeHaveService } from 'src/common/services/safehaven.service';
 import { CustomerModule } from 'src/customer/customer.module';
 import { ItemModule } from 'src/item/item.module';
 import { InventoryModule } from 'src/inventory/inventory.module';
+import { CardRepository } from 'src/cards/schema/card.repository';
+import { TransactionRepository } from 'src/transactions/schema/transactionrepository';
+import { Card, CardSchema } from 'src/cards/schema/card.schema';
+import { Transaction, TransactionSchema } from 'src/transactions/schema/transaction.schema';
 @Module({
     imports: [
         MongooseModule.forFeature([
           {name: Invoice.name, schema: InvoiceSchema},
+          {name: Card.name, schema: CardSchema},
+          {name: Transaction.name, schema: TransactionSchema},
         ]),
         CustomerModule,
         ItemModule,
         InventoryModule,
       ],
     controllers: [InvoiceController],
-    providers: [InvoiceRepository,CronJob, InvoiceService, AxiosInterceptor, TransferWebhookAction, ApiResponse, ApiCall,Utils, SafeHaveService]
+    providers: [
+      InvoiceRepository,
+      CronJob,
+      InvoiceService,
+      AxiosInterceptor,
+      TransferWebhookAction,
+      ApiResponse,
+      Utils,
+      SafeHaveService,
+      CardRepository,
+      TransactionRepository,
+    ]
     
   })
 export class InvoiceModule {
