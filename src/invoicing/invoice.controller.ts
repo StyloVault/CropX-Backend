@@ -4,13 +4,11 @@ import { Post, UseGuards,Get, Req, Body } from '@nestjs/common';
 import { Roles } from 'src/common/decorator/roles';
 import { UserRolesGuard } from 'src/common/roles/user.roles';
 import { IdDTO, InvoiceDTO } from './dto/invoiceDto';
-import { ApiCall } from 'src/common/Helper/ApiCall';
 import { Response } from 'express';
 
 @Controller('api/v1/invoice')
 export class InvoiceController {
-    constructor(private readonly invoiceService: InvoiceService, 
-        private readonly apiCall : ApiCall) {}
+    constructor(private readonly invoiceService: InvoiceService) {}
 
   
     @Post('payment') 
