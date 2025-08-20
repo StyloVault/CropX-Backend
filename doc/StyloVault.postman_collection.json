@@ -1,0 +1,1989 @@
+{
+	"info": {
+		"_postman_id": "75a47f1b-87e0-4382-9c2a-f6d8c98cae33",
+		"name": "StyloVault",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6349852"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\":\"+2349032878128\",\n    \"email\":\"trillzglobal@gmail.com\",\n    \"password\":\"Qwerty123!\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resend Email verification",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/auth/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\":\"email-verification-token\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/verify-email",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"verify-email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send OTP",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk5MzE0LCJleHAiOjE2ODcxMDAyMTR9.joLGaBEgR6c8-1Y3zWGucGWWx1pkuabMoGe1d-2BiDE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/auth/send-otp",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"send-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify OTP",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk5ODc1LCJleHAiOjE2ODcxMDA3NzV9.l7nvckj6hvVZoebhGdn5tpVYHGmJM3_eGN-6V0URz7w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"otp\":\"331838\",\n    \"otpId\":\"648f191bb78e8d2e7b0c942d\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/verify-phone",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"verify-phone"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add PIN",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MTAwNDQ4LCJleHAiOjE2ODcxMDEzNDh9.ctb6VkMEgjF2myNImAJw32kVdiTvdg0nDt2d7-EcDKQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"pin\":\"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/add-pin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"add-pin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Pin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk5ODc1LCJleHAiOjE2ODcxMDA3NzV9.l7nvckj6hvVZoebhGdn5tpVYHGmJM3_eGN-6V0URz7w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPin\":\"1234\",\n    \"newPin\":\"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/change-pin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"change-pin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Business",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk5ODc1LCJleHAiOjE2ODcxMDA3NzV9.l7nvckj6hvVZoebhGdn5tpVYHGmJM3_eGN-6V0URz7w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"oldPin\":\"1234\",\n    \"newPin\":\"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/change-pin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"change-pin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\":\"+2349032878128\",\n    \"email\":\"trillzglobal@gmail.com\",\n    \"adminRole\": \"Blogger\",\n    \"firstName\": \"Michael\",\n    \"lastName\": \"Doe\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/create-admin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"create-admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MjAwOTIyLCJleHAiOjE2ODcyMDE4MjJ9.gpiXfgwSdkefXV2uUHSfyPZQfVGlXGQ65i9zGzYD910",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"userRole\":\"Admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Block - Unblock User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MTAxNjE0LCJleHAiOjE2ODcxMDI1MTR9.n_9ztK0dzWch_805vhjsVL20y1gkt5CzhNE4ItygFOE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\":\"648f16d759c32f877588c2a1\",\n    \"blockStatus\":\"block\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/block-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"block-status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Admin Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MTAxNjE0LCJleHAiOjE2ODcxMDI1MTR9.n_9ztK0dzWch_805vhjsVL20y1gkt5CzhNE4ItygFOE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\":\"648f16d759c32f877588c2a1\",\n    \"adminRole\":\"ITSupport\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/auth/admin-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"admin-role"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginId\":\"+2349032878128\",\n    \"password\":\"Qwerty123!\",\n    \"deviceName\":\"Micheal-Device\",\n    \"deviceToken\":\"firebase-token\",\n    \"ipAddress\":\"127.0.0.1\",\n    \"userAgent\": {\n        \"deviceSerial\":\"OPO192x939302\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"trillzglobal@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/reset-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"verifyToken\":\"password-reset-token\",\n    \"password\":\"Qwerty123!\",\n    \"email\":\"trillzglobal@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/new-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"new-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/auth/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "ImageStore",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/michaelojo/Desktop/Screenshot 2023-04-02 at 21.23.39.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:4000/api/v1/image/upload",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"image",
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc2MDI5MDgsImV4cCI6MTY4NzYwMzgwOH0.udqCCXZOE_10NcZ-LK33zc0nnOOa1QzOzEd_uGSbIvE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"commonName\":\"Beans\",\n    \"productName\": \"Honey Beans\",\n    \"productImage\": \"http://127.0.0.1:4000/62903d18-3edb-4cd4-83c4-a9df5c09f0be.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/products/inc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"inc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc2MDM5ODUsImV4cCI6MTY4NzYwNDg4NX0.T8lzIGbs2lTrwErjhlJH3GXZwdaWJFzQrya16vv8qxs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"6496c6ed2497f8e1040796b7\",\n    \"status\":\"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3003/api/v1/products/inc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"inc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc2MDY0OTUsImV4cCI6MTY4NzYwNzM5NX0.yGElsgJAeU5z1mk4fnGq_4ZczCetRUDrQgDaeU8GhSU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product\":\"6496c6ed2497f8e1040796b7\",\n    \"newsTopic\":\"Beans Spike in Price\",\n    \"newsBody\":\"In a surprising turn of events, the global bean market has witnessed an unprecedented spike in prices. Over the past weeks, beans, a staple in many households and a crucial ingredient in various cuisines, have experienced an astonishing surge in value. This sudden price hike has been attributed to multiple factors, including unfavorable weather conditions affecting crop yields, increased demand from emerging markets, and supply chain disruptions. As a result, consumers and businesses alike are grappling with the ripple effects of this price surge. Analysts predict that this upward trend may persist in the near term, prompting concerns over affordability and potential adjustments in consumption patterns. Stakeholders across the industry are closely monitoring the situation as they navigate this volatile market landscape.\",\n    \"author\":\"John Doe\",\n    \"images\":[\n        \"http://127.0.0.1:4000/62903d18-3edb-4cd4-83c4-a9df5c09f0be.png\",\n        \"http://127.0.0.1:4000/62903d18-3edb-4cd4-83c4-a9df5c09f0be.png\",\n        \"http://127.0.0.1:4000/62903d18-3edb-4cd4-83c4-a9df5c09f0be.png\",\n        \"http://127.0.0.1:4000/62903d18-3edb-4cd4-83c4-a9df5c09f0be.png\"\n    ],\n    \"externalLink\":\"\",\n    \"metadata\":\"\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/products/news",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"news"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc2MDM5ODUsImV4cCI6MTY4NzYwNDg4NX0.T8lzIGbs2lTrwErjhlJH3GXZwdaWJFzQrya16vv8qxs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"6496c6ed2497f8e1040796b7\",\n    \"status\":\"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3003/api/v1/products/inc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"inc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Daily Price",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc2MDM5ODUsImV4cCI6MTY4NzYwNDg4NX0.T8lzIGbs2lTrwErjhlJH3GXZwdaWJFzQrya16vv8qxs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"6496c6ed2497f8e1040796b7\",\n    \"status\":\"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3003/api/v1/products/inc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3003",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"inc"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Multiple News",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/news",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc/6496c6ed2497f8e1040796b7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc",
+								"6496c6ed2497f8e1040796b7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single News",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc/6496c6ed2497f8e1040796b7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc",
+								"6496c6ed2497f8e1040796b7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload",
+			"item": [
+				{
+					"name": "Upload file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/michaelojo/Desktop/Screenshot 2023-03-17 at 11.20.59.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:4000/upload",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cron",
+			"item": [
+				{
+					"name": "Daily Product Cron",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create Wallet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZjBjZDJhOTJiY2M3Y2VmMzVlOTYiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3ODgwNjc5LCJleHAiOjE2ODc4ODE1Nzl9.G-1_ruCUm_Sce4gMeNkcsJgFs7vhYXbIPLzh5NyVkF8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\":\"John\",\n    \"lastName\":\"Doe\",\n    \"emailAddress\":\"johndoe@test.com\",\n    \"phoneNumber\":\"09034444444\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get wallet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZTk3OWYzYWFiNTM2ODRhZWI2OWQiLCJ1c2VyUm9sZSI6IkFkbWluIiwiYWRtaW5Sb2xlIjoiU3VwZXJBZG1pbiIsInVzYWdlIjoiTE9HSU4iLCJpYXQiOjE2ODc3OTYyMTcsImV4cCI6MTY4Nzc5NzExN30.c-Cc0fC8e_dCewzb6OBUr56aIcby_TMwCKMIo_KA8H4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create Card Holder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZjBjZDJhOTJiY2M3Y2VmMzVlOTYiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3ODU5OTE3LCJleHAiOjE2ODc4NjA4MTd9.108ObVQfHy2Ee2kyHNebyjDo9BjF4XbU928HT3pR0XY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"userData\": {\n        \"firstName\":\"John\",\n        \"lastName\":\"Doe\"\n    },\n    \"billingAddress\":{\n        \"line1\":\"1132 Last mail address\",\n        \"city\": \"Barnawa\",\n        \"state\": \"Kaduna\",\n        \"country\": \"NG\",\n        \"postalCode\": \"019293\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/card/holder",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"card",
+										"holder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Card to Account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZjBjZDJhOTJiY2M3Y2VmMzVlOTYiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3ODU5OTE3LCJleHAiOjE2ODc4NjA4MTd9.108ObVQfHy2Ee2kyHNebyjDo9BjF4XbU928HT3pR0XY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"userData\": {\n        \"firstName\":\"John\",\n        \"lastName\":\"Doe\"\n    },\n    \"billingAddress\":{\n        \"line1\":\"1132 Last mail address\",\n        \"city\": \"Barnawa\",\n        \"state\": \"Kaduna\",\n        \"country\": \"NG\",\n        \"postalCode\": \"019293\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/card/holder",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"card",
+										"holder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Banks",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/account",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"account"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Name Enquiry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZjBjZDJhOTJiY2M3Y2VmMzVlOTYiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3Nzk2MDAxLCJleHAiOjE2ODc3OTY5MDF9.8VZqZAk9qs1fJyaGWVZ9WGbM8Jk1LQTcYpiIbMjQe8w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"bankCode\":\"999240\",\n    \"accountNumber\":\"8013712538\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/account/enquiry",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"account",
+										"enquiry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDk1ZjBjZDJhOTJiY2M3Y2VmMzVlOTYiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3Nzk2MDAxLCJleHAiOjE2ODc3OTY5MDF9.8VZqZAk9qs1fJyaGWVZ9WGbM8Jk1LQTcYpiIbMjQe8w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"bankCode\":\"999240\",\n    \"accountNumber\":\"8013712538\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/account/enquiry",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"account",
+										"enquiry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Transactions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/transactions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single Transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/transaction/{{id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"transaction",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Requested Card",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/request-card",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"request-card"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account Details",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/user-banks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"user-banks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "All Wallets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/wallets",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"wallets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single Wallet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/wallet/{{id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"wallet",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accounts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/accounts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Card Requests",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/card-requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"card-requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single Card Request",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/card-request",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"card-request"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/update-card-request",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"update-card-request"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transactions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/transactions/{{id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"transactions",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single Transaction",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzSUQiOiI2NDhlZmJkMDg1YTBjMWRkMzU2OTFkNjAiLCJ1c2VyUm9sZSI6IlVzZXIiLCJ1c2FnZSI6IkxPR0lOIiwiaWF0IjoxNjg3MDk0MDc1LCJleHAiOjE2ODcwOTQ5NzV9.p_2AYtwTj0p2NG7d--HgR-Un55RLPS6yk8vZKOgRV-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/wallets/admin/transaction/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"wallets",
+										"admin",
+										"transaction",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Added Endpoints",
+			"item": [
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userImage\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"dateOfBirth\": \"string\",\n  \"country\": \"string\",\n  \"state\": \"string\",\n  \"address\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Business",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": \"string\",\n  \"description\": \"string\",\n  \"address\": \"string\",\n  \"logoUrl\": \"string\",\n  \"businessSignature\": \"string\",\n  \"registrationNumber\": \"string\",\n  \"registrationDate\": \"string\",\n  \"emailAddress\": \"string\",\n  \"phoneNumber\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/business/:businessId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"business",
+								":businessId"
+							],
+							"variable": [
+								{
+									"key": "businessId",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Pin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pin\": \"1981\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/add-pin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"add-pin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change PIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newPin\": \"1981\",\n    \"oldPin\": \"1980\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/change-pin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-pin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"trillzglobal@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/reset-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"Qwerty123!\",\n    \"otpId\":\"\",\n    \"otp\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/new-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"new-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newPassword\": \"Qwerty123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth/change-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc/subscription",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Sub",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc/subscription",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Subscription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/inc/subscription",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"inc",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stylo Vault Businesses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/auth/all-businesses?limit=25&page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"all-businesses"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "25"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:3001",
+			"type": "string"
+		}
+	]
+}

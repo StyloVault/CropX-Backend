@@ -27,7 +27,7 @@ export class InvoiceService {
     }
    async getOneInvoice(id : string, res: Response) {
     try {
-        return this.apiResponse.success(res, 'Invoice retreived successfully', await this.invoiceRepository.getOne(id))
+        return this.apiResponse.success(res, 'Invoice retrieved successfully', await this.invoiceRepository.getOne(id))
     }catch(error) {
        return this.apiResponse.failure(res, error.message, error, error.statusCode)
     }

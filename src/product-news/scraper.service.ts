@@ -36,6 +36,7 @@ export class ProductScraperService {
           content:
             'Extract all product information from the following HTML. ' +
             'Return JSON array of objects with fields: productName, commonName, productImage, productLocation, unitOfMeasure, currentPrice.\n' +
+            'Make sure you stick to the product that there is a price for and its on their stock list, this is targeting farm product.\n' +
             html,
         },
       ],
