@@ -43,6 +43,9 @@ export class InventoryService {
          const {sID, userId} = decoded
          const payload = this.preparePayload(sID, body);
           const inventory = await this.inventoryRepository.updateInventory({_id : id, businessId: sID},payload);
+          if (inventory === null) {
+              return this.apiResponse.failure(res, 'Inventory not found', [], 404);
+          }
           await this.itemRepository.upsertItem({ inventoryId: inventory._id }, {
                 name: inventory.name,
                 description: inventory.description,
