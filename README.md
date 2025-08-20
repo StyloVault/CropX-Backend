@@ -35,6 +35,10 @@ npm install
 npm run start:dev
 ```
 
+### Environment Variables
+
+`DAILY_NEWS_LINKS` - JSON array of news links used for daily AI summaries.
+
 ## API Endpoints
 
 - `POST /api/v1/inventory/create` - Create a new inventory item

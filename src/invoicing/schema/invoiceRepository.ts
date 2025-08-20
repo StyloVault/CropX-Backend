@@ -161,10 +161,11 @@ export class InvoiceRepository {
         invoiceId : this.generateInvoiceReference(),
 
         items: body.items.map((item) => ({
+            id: item.id || null,
             name: item.name || null,
-            price: item.price || null,
+            price: Number(item.price),
             unitOfMeasure: item.unitOfMeasure || null,
-            quantity: item.quantity || null,
+            quantity: Number(item.quantity),
             description: item.description || null,
           })),
 

@@ -4,6 +4,8 @@ Base URL: `/api/v1/products`
 
 This module manages products, news posts and daily prices.
 
+Daily news links defined in `DAILY_NEWS_LINKS` are summarized automatically at 11am each day.
+
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
 | POST | `/inc` | Create a product (admin only) |

@@ -7,17 +7,46 @@ import { ApiResponse } from 'src/common/Helper/apiResponse';
 import { Response, response } from 'express';
 import { TransferWebhookAction } from 'src/Actions/transferWebhook';
 import { Utils } from 'src/common/Helper/Utils';
+import { ItemRepository } from 'src/item/item.repository';
+import { InventoryRepository } from 'src/inventory/schema/inventory.repository';
 
 @Injectable()
 export class InvoiceService {
  
-    constructor(private invoiceRepository : InvoiceRepository, 
+    constructor(private invoiceRepository : InvoiceRepository,
                        private apiResponse : ApiResponse ,
                        private readonly utils : Utils,
-                       private transferWebhookAction : TransferWebhookAction){}
+                       private transferWebhookAction : TransferWebhookAction,
+                       private itemRepository: ItemRepository,
+                       private inventoryRepository: InventoryRepository){}
 
     async createInvoice(sID: string, body : InvoiceDTO, res: Response) {
         try {
+         for (const item of body.items) {
+             item.price = Number(item.price);
+             item.quantity = Number(item.quantity);
+             if (item.id) {
+                 try { await this.itemRepository.getItemById(item.id); } catch {
+                     const newItem = await this.itemRepository.createItem({
+                         name: item.name,
+                         description: item.description,
+                         unitOfMeasure: item.unitOfMeasure,
+                         price: item.price,
+                         businessId: sID,
+                     });
+                     item.id = newItem._id.toString();
+                 }
+             } else {
+                 const newItem = await this.itemRepository.createItem({
+                     name: item.name,
+                     description: item.description,
+                     unitOfMeasure: item.unitOfMeasure,
+                     price: item.price,
+                     businessId: sID,
+                 });
+                 item.id = newItem._id.toString();
+             }
+         }
          const invoice = await this.invoiceRepository.createInvoice(sID, body);
          return this.apiResponse.success(res, 'Invoice created successfully', invoice, 201)
         }catch (error) {
@@ -67,7 +96,7 @@ export class InvoiceService {
   
     }
 
-    async invoicePayment(invoiceId : string , res: Response) {
+  async invoicePayment(invoiceId : string , res: Response) {
         try {
            
          const invoice =  await this.invoiceRepository.getOne(invoiceId)
@@ -91,6 +120,37 @@ export class InvoiceService {
     }catch (error) {
         return this.apiResponse.failure(res, error.message, [], 400)
     }
+    }
+
+    private async reduceInventory(items: any[]) {
+        for (const item of items) {
+            if (!item.id) continue;
+            try {
+                const invItem = await this.itemRepository.getItemById(item.id);
+                if (invItem?.inventoryId) {
+                    await this.inventoryRepository.updateInventory(
+                        { _id: invItem.inventoryId },
+                        { $inc: { quantityAvailable: -item.quantity } },
+                    );
+                }
+            } catch (e) {
+                // ignore errors
+            }
+        }
+    }
+
+    async manualPayment(invoiceId: string, res: Response) {
+        try {
+            const invoice = await this.invoiceRepository.getOne(invoiceId);
+            if (invoice.status === InvoiceStatus.SETTLED) {
+                return this.apiResponse.success(res, 'Invoice already settled', invoice);
+            }
+            await this.invoiceRepository.updateInvoice({ _id: invoiceId }, { status: InvoiceStatus.SETTLED });
+            await this.reduceInventory(invoice.items);
+            return this.apiResponse.success(res, 'Invoice marked as paid', []);
+        } catch (error) {
+            return this.apiResponse.failure(res, error.message, [], 400);
+        }
     }
 
       //Admin Endpoints 
