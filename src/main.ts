@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppConfig } from './config.schema';
@@ -9,10 +9,19 @@ import helmet from 'helmet';
 import Bugsnag from '@bugsnag/js';
 import * as bodyParser from 'body-parser';
 import bugsnagPluginExpress from '@bugsnag/plugin-express';
+import { NextFunction, Request, Response } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+
+  const logger = new Logger('HTTP');
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.on('finish', () => {
+      logger.log(`${req.method} ${req.originalUrl} -> ${res.statusCode}`);
+    });
+    next();
+  });
 
   Bugsnag.start({
     apiKey: AppConfig.BUGSNAG_KEY,
