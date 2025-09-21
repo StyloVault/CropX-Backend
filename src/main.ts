@@ -1,4 +1,11 @@
-import { ValidationPipe } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  Logger,
+  NotFoundException,
+  ValidationPipe,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppConfig } from './config.schema';
@@ -9,10 +16,53 @@ import helmet from 'helmet';
 import Bugsnag from '@bugsnag/js';
 import * as bodyParser from 'body-parser';
 import bugsnagPluginExpress from '@bugsnag/plugin-express';
+import { NextFunction, Request, Response } from 'express';
+
+@Catch(NotFoundException)
+class NotFoundLoggingFilter implements ExceptionFilter {
+  constructor(private readonly logger: Logger) {}
+
+  catch(exception: NotFoundException, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
+
+    const status = exception.getStatus();
+    const responseBody = exception.getResponse();
+
+    response.locals.__notFoundLogged = true;
+    this.logger.warn(
+      `${request.method} ${request.originalUrl} -> ${status} (${exception.message})`,
+    );
+
+    if (response.headersSent) {
+      return;
+    }
+
+    if (typeof responseBody === 'string') {
+      response.status(status).send(responseBody);
+      return;
+    }
+
+    response.status(status).json(responseBody);
+  }
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+
+  const logger = new Logger('HTTP');
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.on('finish', () => {
+      if (!res.locals.__notFoundLogged) {
+        logger.log(`${req.method} ${req.originalUrl} -> ${res.statusCode}`);
+      }
+    });
+    next();
+  });
+
+  app.useGlobalFilters(new NotFoundLoggingFilter(logger));
 
   Bugsnag.start({
     apiKey: AppConfig.BUGSNAG_KEY,
