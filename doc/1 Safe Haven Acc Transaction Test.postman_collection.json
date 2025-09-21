@@ -1,0 +1,797 @@
+{
+	"info": {
+		"_postman_id": "ff71e555-1cdb-4506-9f82-e858c41004b3",
+		"name": "1 Safe Haven Acc Transaction Test",
+		"description": "Safe Haven Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6349852"
+	},
+	"item": [
+		{
+			"name": "NIP Inward",
+			"item": [
+				{
+					"name": "Single Credit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{PAYGATE_NIBSS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?><FTSingleCreditRequest><SessionID>090267240322143855464015846940</SessionID><NameEnquiryRef>090267240322143855464015846940</NameEnquiryRef><DestinationInstitutionCode>999240</DestinationInstitutionCode><ChannelCode>2</ChannelCode><BeneficiaryAccountName>{{NibssbeneficiaryName}}</BeneficiaryAccountName><BeneficiaryAccountNumber>{{beneficaryAccountNumber}}</BeneficiaryAccountNumber><BeneficiaryBankVerificationNumber></BeneficiaryBankVerificationNumber><BeneficiaryKYCLevel></BeneficiaryKYCLevel><OriginatorAccountName>Godstime Tekevwe David</OriginatorAccountName><OriginatorAccountNumber>20158406882</OriginatorAccountNumber><OriginatorBankVerificationNumber>2200000007</OriginatorBankVerificationNumber><OriginatorKYCLevel></OriginatorKYCLevel><TransactionLocation></TransactionLocation><Narration>MRWHAM</Narration><PaymentReference>090267240322143855464015846882</PaymentReference><Amount>6300.00</Amount></FTSingleCreditRequest>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/nip/fundtransfersingleitem_dc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"nip",
+								"fundtransfersingleitem_dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reversal on Credit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?><FTSingleCreditRequest><SessionID>090267240322143855464015846939</SessionID><NameEnquiryRef>090267240322143855464015846939</NameEnquiryRef><DestinationInstitutionCode>999240</DestinationInstitutionCode><ChannelCode>2</ChannelCode><BeneficiaryAccountName>TRUSTFUND / MICHAEL OJO</BeneficiaryAccountName><BeneficiaryAccountNumber>8014609039</BeneficiaryAccountNumber><BeneficiaryBankVerificationNumber></BeneficiaryBankVerificationNumber><BeneficiaryKYCLevel></BeneficiaryKYCLevel><OriginatorAccountName>Godstime Tekevwe David</OriginatorAccountName><OriginatorAccountNumber>20158406882</OriginatorAccountNumber><OriginatorBankVerificationNumber>2200000007</OriginatorBankVerificationNumber><OriginatorKYCLevel></OriginatorKYCLevel><TransactionLocation></TransactionLocation><Narration>MRWHAM</Narration><PaymentReference>090267240322143855464015846882</PaymentReference><Amount>6300.00</Amount></FTSingleCreditRequest>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/nip/fundtransferAdvice_dc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"nip",
+								"fundtransferAdvice_dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single Direct Debit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?><FTSingleCreditRequest><SessionID>090267240322143855464015846939</SessionID><NameEnquiryRef>090267240322143855464015846939</NameEnquiryRef><DestinationInstitutionCode>999240</DestinationInstitutionCode><ChannelCode>2</ChannelCode><BeneficiaryAccountName>TRUSTFUND / MICHAEL OJO</BeneficiaryAccountName><BeneficiaryAccountNumber>8014609039</BeneficiaryAccountNumber><BeneficiaryBankVerificationNumber></BeneficiaryBankVerificationNumber><BeneficiaryKYCLevel></BeneficiaryKYCLevel><OriginatorAccountName>Godstime Tekevwe David</OriginatorAccountName><OriginatorAccountNumber>20158406882</OriginatorAccountNumber><OriginatorBankVerificationNumber>2200000007</OriginatorBankVerificationNumber><OriginatorKYCLevel></OriginatorKYCLevel><TransactionLocation></TransactionLocation><Narration>MRWHAM</Narration><PaymentReference>090267240322143855464015846882</PaymentReference><Amount>6300.00</Amount></FTSingleCreditRequest>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/nip/fundtransfersingleitem_dd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"nip",
+								"fundtransfersingleitem_dd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reversal on Direct Debit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?><FTSingleCreditRequest><SessionID>090267240322143855464015846939</SessionID><NameEnquiryRef>090267240322143855464015846939</NameEnquiryRef><DestinationInstitutionCode>999240</DestinationInstitutionCode><ChannelCode>2</ChannelCode><BeneficiaryAccountName>TRUSTFUND / MICHAEL OJO</BeneficiaryAccountName><BeneficiaryAccountNumber>8014609039</BeneficiaryAccountNumber><BeneficiaryBankVerificationNumber></BeneficiaryBankVerificationNumber><BeneficiaryKYCLevel></BeneficiaryKYCLevel><OriginatorAccountName>Godstime Tekevwe David</OriginatorAccountName><OriginatorAccountNumber>20158406882</OriginatorAccountNumber><OriginatorBankVerificationNumber>2200000007</OriginatorBankVerificationNumber><OriginatorKYCLevel></OriginatorKYCLevel><TransactionLocation></TransactionLocation><Narration>MRWHAM</Narration><PaymentReference>090267240322143855464015846882</PaymentReference><Amount>6300.00</Amount></FTSingleCreditRequest>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/nip/fundtransferAdvice_dd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"nip",
+								"fundtransferAdvice_dd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer",
+			"item": [
+				{
+					"name": "Sub Account  Transfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "ClientId",
+								"value": "{{clientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameEnquiryReference\": \"{{nameEnquiryReferenceSub}}\", // Sub\n    \"debitAccountNumber\":\"{{debitAccountNumber}}\", //6014888078, 0108460487\n    \"beneficiaryBankCode\":\"{{bankCode}}\",\n    \"beneficiaryAccountNumber\":\"{{beneficaryAccountNumber}}\",\n    \"amount\": 1000,\n    \"paymentReference\":\"\",\n    \"narration\":\"Transfer to Bro\",\n    \"saveBeneficiary\": true,\n    \"twoFactorAuthType\":\"PIN\",\n    \"pin\": \"{{PIN}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/transfers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Virtual Account Transfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "ClientId",
+								"value": "{{clientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameEnquiryReference\": \"{{nameEnquiryRefVirtual}}\", // Sub\n    \"debitAccountNumber\":\"{{debitAccountNumber}}\", \n    \"beneficiaryBankCode\":\"{{bankCode}}\",\n    \"beneficiaryAccountNumber\":\"{{virtualAccountNumber}}\",\n    \"amount\": 1000,\n    \"paymentReference\":\"\",\n    \"narration\":\"Transfer to Bro\",\n    \"saveBeneficiary\": true,\n    \"twoFactorAuthType\":\"PIN\",\n    \"pin\": \"{{PIN}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/transfers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Intra Transfer with Provided Account Info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "ClientId",
+								"value": "{{clientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameEnquiryReference\": \"{{nameEnquiryReferenceSub}}\",\n    \"debitAccountNumber\":\"{{debitAccountNumber}}\",\n    \"beneficiaryBankCode\":\"{{bankCode}}\",\n    \"beneficiaryAccountNumber\":\"{{beneficaryAccountNumber}}\",\n    \"amount\": 1000,\n    \"paymentReference\":\"\",\n    \"narration\":\"Transfer to Bro\",\n    \"saveBeneficiary\": true,\n    \"twoFactorAuthType\":\"PIN\",\n    \"pin\": \"{{PIN}}\",\n    \"dummyAccountInfo\": {\n        \"sessionId\":\"990909093884875848758484848989\",\n        \"debitAccountNumber\": \"0102384785\", \n        \"debitAccountName\": \"SEUN NOTFINE\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/transfers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inter Transfer  With Provided Account Info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "ClientId",
+								"value": "{{clientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameEnquiryReference\": \"{{nameEnquiryReferenceSub}}\",\n    \"debitAccountNumber\":\"{{debitAccountNumber}}\",\n    \"beneficiaryBankCode\":\"000013\",\n    \"beneficiaryAccountNumber\":\"{{beneficaryAccountNumber}}\",\n    \"amount\": 1000,\n    \"paymentReference\":\"\",\n    \"narration\":\"Transfer to Bro\",\n    \"saveBeneficiary\": true,\n    \"twoFactorAuthType\":\"PIN\",\n    \"pin\": \"{{PIN}}\",\n    \"dummyAccountInfo\": {\n        \"debitAccountNumber\": \"{{subAccountDebitAccount}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/transfers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Internal Hook Request",
+			"item": [
+				{
+					"name": "Debit Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{PAYGATE_BANK_HOOK_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"debitAccountNumber\": \"{{debitAccountNumber}}\",\n    \"paymentReference\": \"94859900049300394\",\n    \"narration\":\"CARD Transaction\",\n    \"paymentTypeId\":\"3\",\n    \"amount\":10000,\n    \"glAccountId\":\"4\",\n    \"chargeValueAddedTax\":false,\n    \"overrideLimits\":false,\n    \"type\":\"\",\n    \"overrideCanDebit\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/bank/debit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"bank",
+								"debit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{PAYGATE_BANK_HOOK_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"beneficiaryAccountNumber\":\"{{debitAccountNumber}}\",\n    \"paymentReference\":\"94859900049300394948\",\n    \"narration\":\"Reversal|CARD Transaction\",\n    \"amount\":1000,\n    \"paymentTypeId\":\"3\",\n    \"glAccountId\":\"2\",\n    \"chargeStampDuty\":false,\n    \"overrideLimits\":false,\n    \"overrideCanCredit\": false,\n    \"skipReferenceCheck\": true,\n    \"chargedFees\": 50,\n    \"isISWCredit\": false\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/bank/credit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"bank",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Debit Overdraft within Limit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{PAYGATE_BANK_HOOK_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"debitAccountNumber\": \"{{overdraftAccount}}\",\n    \"paymentReference\": \"94859900049300394\",\n    \"narration\":\"CARD Transaction\",\n    \"paymentTypeId\":\"3\",\n    \"amount\":100,\n    \"glAccountId\":\"2\",\n    \"chargeValueAddedTax\":false,\n    \"overrideLimits\":false,\n    \"type\":\"\",\n    \"overrideCanDebit\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/bank/debit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"bank",
+								"debit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Different GL Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{PAYGATE_BANK_HOOK_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"beneficiaryAccountNumber\":\"{{debitAccountNumber}}\",\n    \"paymentReference\":\"94859900049300394948\",\n    \"narration\":\"Reversal|CARD Transaction\",\n    \"amount\":10000,\n    \"paymentTypeId\":\"3\",\n    \"glAccountId\":\"4\",\n    \"chargeStampDuty\":false,\n    \"overrideLimits\":false,\n    \"overrideCanCredit\": false,\n    \"skipReferenceCheck\": true,\n    \"chargedFees\": 50,\n    \"isISWCredit\": false\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/hooks/bank/credit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hooks",
+								"bank",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50QWNjZXNzVHlwZSI6IkFsbCIsIl9pZCI6IjY3MjM5NzQyZjFhY2I2MzZkYTgxODFlNiIsInR5cGUiOiJJbmRpdmlkdWFsIiwiY2xpZW50IjoiNjcyMzk3YWVmMWFjYjYzNmRhODE4MWVmIiwidGl0bGUiOiJNciIsImVtYWlsQWRkcmVzcyI6InRyaWxsemdsb2JhbEBnbWFpbC5jb20iLCJlbWFpbEFkZHJlc3NWZXJpZmllZCI6ZmFsc2UsImFjY291bnRUeXBlIjoiU2F2aW5ncyIsInBob25lTnVtYmVyIjoiKzIzNDkwMzI4NzgxMjgiLCJwYXNzd29yZE5ldmVyRXhwaXJlcyI6ZmFsc2UsImxhc3RUaW1lUGFzc3dvcmRVcGRhdGVkIjoiMjAyNC0xMC0zMVQxNDo0MjoxMC42NjNaIiwicm9sZSI6Ik93bmVyIiwicGFzc3dvcmRBdHRlbXB0cyI6MCwiaXNCbG9ja2VkIjpmYWxzZSwic3RhdHVzIjoiQWN0aXZlIiwiZ2VuZGVyIjoiTWFsZSIsImRhdGVPZkJpcnRoIjoiMTctQXByLTE5ODgiLCJtYXJpdGFsU3RhdHVzIjoiU2luZ2xlIiwiY291bnRyeU9mQmlydGgiOiJOaWdlcmlhIiwic3RhdGVPZk9yaWdpbiI6IkFiaWEiLCJjaXR5T2ZPcmdpbiI6IlllcCIsImNvbnRhY3RBZGRyZXNzIjp7Il9pZCI6IjY3MjM5NzQyZjFhY2I2MzZkYTgxODFlNyIsImNpdHkiOiJZZXAiLCJzdGF0ZSI6IkFiaWEiLCJjb3VudHJ5IjoiTmlnZXJpYSJ9LCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTMxVDE0OjQyOjEwLjY2NVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTMxVDE0OjQyOjEwLjY2NVoiLCJ0d29GYWN0b3JBdXRoTWV0aG9kcyI6W3siX2lkIjoiNjcyMzk3ZDFmMWFjYjYzNmRhODE4MWZmIiwidHlwZSI6IlBJTiIsInB1cnBvc2UiOiJUd29GYWN0b3IiLCJzZWNyZXQiOiJVMkZzZEdWa1gxODVabkxDL0Z4S1p5WE9SMEtaMTVnc3lWZEtlakUzeWpVPSIsImNyZWF0ZWRBdCI6IjIwMjQtMTAtMzFUMTQ6NDQ6MzMuMjA4WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTAtMzFUMTQ6NDQ6MzMuMjA4WiJ9LHsiX2lkIjoiNjcyMzk3ZGFmMWFjYjYzNmRhODE4MjA1IiwidHlwZSI6IlNNU0VtYWlsT1RQIiwicHVycG9zZSI6IlR3b0ZhY3RvciIsImNyZWF0ZWRBdCI6IjIwMjQtMTAtMzFUMTQ6NDQ6NDIuNjgzWiIsInVwZGF0ZWRBdCI6IjIwMjQtMTAtMzFUMTQ6NDQ6NDIuNjk0WiJ9XSwiYWNjb3VudEFjY2Vzc0NvbnRyb2wiOltdLCJfX3YiOjIsInJld2FyZEFjY291bnRJZCI6IjY3NjEzNjQ1MjdlNTViNmRjNGJhYWIyZSIsImZpcnN0TmFtZSI6Ik1pY2hlYWwiLCJsYXN0TmFtZSI6Ik9qbyIsIm90aGVyTmFtZXMiOiJBYmF5b21pIiwidHdvRmFjdG9yQXV0aEVuYWJsZWQiOnRydWUsImxhc3RMb2dpbiI6IjIwMjQtMTItMjFUMTM6Mzg6MTkuNzE1WiIsImlhdCI6MTczNDc4ODQxMiwiZXhwIjoxNzM4MjQ0NDEyfQ.YubgWoJdGfy7OKrPG5waWW2TzMLmnCQpY5Km1xyKjZs",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8020",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "63abfe26312c01001ecfed30",
+			"type": "string"
+		},
+		{
+			"key": "PAYGATE_NIBSS_TOKEN",
+			"value": "3uQngb0aZbD9gaUPiSGl7Q02UT20YxrNH4NFaDpWnC2EV8rqoFVNiY37lQ87LCUl",
+			"type": "string"
+		},
+		{
+			"key": "PAYGATE_BANK_HOOK_TOKEN",
+			"value": "3uQngb0aZbD9gaUPiSGl7Q02UT20YxrNH4NFaDpWnC2EV8rqoFVNiY37lQ87LCUl",
+			"type": "string"
+		},
+		{
+			"key": "debitAccountNumber",
+			"value": "0108460487",
+			"type": "string"
+		},
+		{
+			"key": "virtualAccountNumber",
+			"value": "6014888078",
+			"type": "string"
+		},
+		{
+			"key": "nameEnquiryReferenceSub",
+			"value": "999240241223054039808535904875",
+			"type": "string"
+		},
+		{
+			"key": "nameEnquiryRefVirtual",
+			"value": "999240241218174820114532305323",
+			"type": "string"
+		},
+		{
+			"key": "beneficaryAccountNumber",
+			"value": "0117846724",
+			"type": "string"
+		},
+		{
+			"key": "NibssbeneficiaryName",
+			"value": "MICHAEL ABAYOMI OJO",
+			"type": "string"
+		},
+		{
+			"key": "PIN",
+			"value": "1980",
+			"type": "string"
+		},
+		{
+			"key": "bankCode",
+			"value": "999240",
+			"type": "string"
+		},
+		{
+			"key": "subAccountDebitAccount",
+			"value": "8028495944",
+			"type": "string"
+		},
+		{
+			"key": "overdraftAccount",
+			"value": "8024414283",
+			"type": "string"
+		}
+	]
+}

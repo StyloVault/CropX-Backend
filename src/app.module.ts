@@ -48,6 +48,7 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { CardsModule } from './cards/cards.module';
 import { HooksModule } from './hooks/hooks.module';
 import { CustomerModule } from './customer/customer.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 if (AppConfig.APP_ENV === 'development') {
   mongoose.set('debug', true);
@@ -61,6 +62,7 @@ const loggerMiddleware = (req: Request, res: Response, next: () => void) => {
 @Module({
   imports: [
     UsersModule,
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: [`.env`],
       validationSchema: configValidationSchema,

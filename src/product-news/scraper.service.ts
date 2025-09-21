@@ -41,6 +41,7 @@ export class ProductScraperService {
         },
       ],
     });
+    console.log("Completion: ", completion)
 
     try {
       const data = JSON.parse(completion);

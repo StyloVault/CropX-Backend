@@ -22,7 +22,7 @@ export class InventoryRepository {
     
        public async getAll(query, sID: string |null = null) {
 
-        let queryObject: any = { deleted: { $ne: true } };
+        let queryObject: any = { };
         let {status, search, page, limit, sort, fields, numericFilters } = query;
     
         if (status && !Object.values(InventoryStatus).includes(status))  {

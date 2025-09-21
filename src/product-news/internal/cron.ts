@@ -37,6 +37,7 @@ export class CronJob {
     }
   }
 
+  // @Cron(CronExpression.EVERY_MINUTE)
   @Cron(CronExpression.EVERY_DAY_AT_1AM)
   async refreshProducts() {
     try {
@@ -59,6 +60,7 @@ export class CronJob {
     }
   }
 
+  // @Cron(CronExpression.EVERY_MINUTE)
   @Cron(CronExpression.EVERY_DAY_AT_11AM)
   async processDailyNews() {
     const linksEnv = process.env.DAILY_NEWS_LINKS;
