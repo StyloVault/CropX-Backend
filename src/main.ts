@@ -1,3 +1,4 @@
+
 import {
   ArgumentsHost,
   Catch,
@@ -6,6 +7,7 @@ import {
   NotFoundException,
   ValidationPipe,
 } from '@nestjs/common';
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppConfig } from './config.schema';
@@ -55,12 +57,12 @@ async function bootstrap() {
   const logger = new Logger('HTTP');
   app.use((req: Request, res: Response, next: NextFunction) => {
     res.on('finish', () => {
-      if (!res.locals.__notFoundLogged) {
-        logger.log(`${req.method} ${req.originalUrl} -> ${res.statusCode}`);
-      }
+      logger.log(`${req.method} ${req.originalUrl} -> ${res.statusCode}`);
+
     });
     next();
   });
+
 
   app.useGlobalFilters(new NotFoundLoggingFilter(logger));
 
